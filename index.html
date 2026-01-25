@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glenn Wenand Adorio | Computer Engineering Graduate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #f1f5f9;
+            --text-gray: #94a3b8;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+        }
+        
+        body.light-mode {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --text-light: #1e293b;
+            --text-gray: #64748b;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 100;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        body.light-mode nav {
+            background: rgba(248, 250, 252, 0.95);
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .theme-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1e3a8a 50%, var(--bg-dark) 100%);
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            border: 4px solid var(--accent);
+            margin: 0 auto 2rem auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+        
+        .cta-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-light);
+            border: 2px solid var(--accent);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-box {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .about-box p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: var(--text-light);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .project-card p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tech-tag {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            color: var(--accent-purple);
+            font-size: 0.9rem;
+        }
+        
+        .award-box {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .award-icon {
+            font-size: 3rem;
+            color: #fbbf24;
+        }
+        
+        .award-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .award-box p {
+            color: var(--text-gray);
+        }
+        
+        .exp-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+        }
+        
+        .exp-header {
+            margin-bottom: 1rem;
+        }
+        
+        .exp-header h3 {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+        
+        .exp-header .company {
+            color: var(--text-light);
+        }
+        
+        .exp-header .duration {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        .exp-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .exp-card li {
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .exp-card li:before {
+            content: "▹";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        
+        .edu-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+        }
+        
+        .edu-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .edu-card .school {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .edu-card .year {
+            color: var(--text-gray);
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .cert-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .cert-card i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .cert-card p {
+            color: var(--text-gray);
+        }
+        
+        .contact-box {
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--accent);
+        }
+        
+        .social-link i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .social-link:hover i {
+            color: white;
+        }
+        
+        .contact-info p {
+            color: var(--text-gray);
+            margin: 0.5rem 0;
+        }
+        
+        footer {
+            background: var(--bg-card);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .skills-grid, .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .award-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">GA</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <img src="profile.jpg" alt="Glenn Adorio" class="profile-img" onerror="this.style.display='none'">
+            <h1>Glenn Wenand Arsemel Adorio</h1>
+            <h2>Computer Engineering Graduate</h2>
+            <p>📍 General Mariano Alvarez, Cavite</p>
+            <div class="cta-btns">
+                <a href="mailto:glennkoy0409@gmail.com" class="btn btn-primary">Get In Touch</a>
+                <a href="#projects" class="btn btn-secondary">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-box">
+                <p>Computer Engineering graduate with hands-on experience in software development, networking, and cybersecurity. Passionate about creating innovative solutions using embedded systems and software engineering. Proven track record in academic research and IT implementation.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Arduino IDE</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fas fa-shield-alt"></i> Networking & Security</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">DNS</span>
+                        <span class="skill-tag">VPNs</span>
+                        <span class="skill-tag">Firewalls</span>
+                        <span class="skill-tag">Penetration Testing</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fas fa-server"></i> Operating Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux (Ubuntu, Debian)</span>
+                        <span class="skill-tag">Windows Server</span>
+                        <span class="skill-tag">Virtualization</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microsoft Office</span>
+                        <span class="skill-tag">Arduino</span>
+                        <span class="skill-tag">Embedded Systems</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Featured Project</h2>
+            <div class="project-card">
+                <h3>Syringe Needle Collector Machine</h3>
+                <p>Award-winning automation solution using Arduino micro-controller to improve medical waste collection efficiency and safety. Recognized as Most Outstanding Research in Computer Engineering.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Embedded Systems</span>
+                    <span class="tech-tag">Automation</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="awards">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <div class="award-box">
+                <i class="fas fa-trophy award-icon"></i>
+                <div>
+                    <h3>Most Outstanding Research in Computer Engineering</h3>
+                    <p>Syringe Needle Collector Machine Using Arduino Micro-Controller</p>
+                    <p><small>10th LPU-Cavite College of Engineering Research Colloquium</small></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Intern / IT Personnel</h3>
+                    <p class="company">Technomotion Controls International</p>
+                    <p class="duration">July 13 - August 23, 2023</p>
+                </div>
+                <ul>
+                    <li>Gained practical experience in IT infrastructure and system administration</li>
+                    <li>Assisted with network configuration and troubleshooting</li>
+                    <li>Applied cybersecurity principles in real-world enterprise environment</li>
+                    <li>Supported technical operations and system maintenance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="edu-card">
+                <h3>Bachelor of Science in Computer Engineering</h3>
+                <p class="school">Lyceum of the Philippines University - Cavite</p>
+                <p class="year">2019 - 2025</p>
+            </div>
+            <div class="edu-card">
+                <h3>Science, Technology, Engineering and Mathematics (STEM)</h3>
+                <p class="school">Holy Family Academy of GMA Cavite</p>
+                <p class="year">2017 - 2019</p>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2 class="section-title">Certifications & Training</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <i class="fas fa-award"></i>
+                    <p>Cyber Security Workshop - ICPEP.SE-LPUCPES</p>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-award"></i>
+                    <p>Cyber Security Awareness Seminar - LPU Cavite</p>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-award"></i>
+                    <p>Multiple Cyber Security Workshop Completions</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-box">
+                <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem;">I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
+                <div class="social-links">
+                    <a href="mailto:glennkoy0409@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/gwada0409" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> glennkoy0409@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +63 906 199 5229</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 Glenn Wenand Arsemel Adorio. Built with HTML & CSS</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.querySelector('.theme-btn i');
+            icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    </script>
+</body>
+</html>
