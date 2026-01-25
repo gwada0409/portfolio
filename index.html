@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glenn Wenand Adorio | Computer Engineering Graduate</title>
+    <title>Glenn Wenand Arsemel Adorio | Computer Engineering Graduate</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -99,18 +99,54 @@
             background: linear-gradient(135deg, var(--bg-dark) 0%, #1e3a8a 50%, var(--bg-dark) 100%);
         }
         
-        .profile-img {
+        .profile-img-container {
             width: 200px;
             height: 200px;
+            margin: 0 auto 2rem auto;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
             object-position: center;
             border: 4px solid var(--accent);
-            margin: 0 auto 2rem auto;
-            display: block;
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .profile-img-main {
+            z-index: 2;
+        }
+        
+        .profile-img-hover {
+            z-index: 1;
+            opacity: 0;
+        }
+        
+        .profile-img-container:hover .profile-img-main {
+            opacity: 0;
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .profile-img-container:hover .profile-img-hover {
+            opacity: 1;
+            transform: scale(1.05) rotate(-5deg);
+        }
+        
+        .profile-img-container:hover {
+            animation: profilePulse 0.6s ease-in-out;
+        }
+        
+        @keyframes profilePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         .hero h1 {
@@ -242,6 +278,7 @@
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
         }
         
         .project-card h3 {
@@ -259,6 +296,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
         
         .tech-tag {
@@ -267,6 +305,221 @@
             border-radius: 15px;
             color: var(--accent-purple);
             font-size: 0.9rem;
+        }
+        
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .gallery-item {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 3rem;
+        }
+        
+        .gallery-caption {
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-gray);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            animation: fadeIn 0.3s;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                backdrop-filter: blur(0px);
+            }
+            to { 
+                opacity: 1;
+                backdrop-filter: blur(10px);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border-radius: 10px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+            background: rgba(59, 130, 246, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            animation: slideUp 0.5s ease-out 0.2s both;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes zoomOut {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeOut {
+            from { 
+                opacity: 1;
+            }
+            to { 
+                opacity: 0;
+            }
+        }
+        
+        /* Project Demo Styles */
+        .demo-container {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .demo-video {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .demo-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .demo-description {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .demo-description h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-description p {
+            color: var(--text-gray);
+            line-height: 1.6;
         }
         
         .award-box {
@@ -439,13 +692,19 @@
                 font-size: 0.9rem;
             }
             
-            .skills-grid, .cert-grid {
+            .skills-grid, .cert-grid, .gallery-grid {
                 grid-template-columns: 1fr;
             }
             
             .award-box {
                 flex-direction: column;
                 text-align: center;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
             }
         }
     </style>
@@ -458,6 +717,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button></li>
             </ul>
@@ -466,8 +726,11 @@
 
     <section class="hero">
         <div>
-            <img src="profile.jpg" alt="Glenn Adorio" class="profile-img" onerror="this.style.display='none'">
-            <h1>Glenn Wenand Arsemel Adorio</h1>
+            <div class="profile-img-container">
+                <img src="profile.jpg" alt="Glenn Adorio" class="profile-img profile-img-main" onerror="this.style.display='none'">
+                <img src="profile-hover.jpg" alt="Glenn Adorio Alternative" class="profile-img profile-img-hover" onerror="this.style.display='none'">
+            </div>
+            <h1>Glenn Wenand Adorio</h1>
             <h2>Computer Engineering Graduate</h2>
             <p>📍 General Mariano Alvarez, Cavite</p>
             <div class="cta-btns">
@@ -537,6 +800,51 @@
                     <span class="tech-tag">C++</span>
                     <span class="tech-tag">Embedded Systems</span>
                     <span class="tech-tag">Automation</span>
+                </div>
+                
+                <!-- Project Demo Section -->
+                <div class="demo-container">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-video"></i> Project Demo</h4>
+                    <video class="demo-video" controls style="display: block;">
+                        <source src="project-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="window.open('https://github.com/gwada0409', '_blank')"><i class="fab fa-github"></i> View Code</button>
+                        <button class="demo-btn"><i class="fas fa-file-pdf"></i> Documentation</button>
+                    </div>
+                    <div class="demo-description">
+                        <h4>How It Works</h4>
+                        <p>The Syringe Needle Collector Machine utilizes Arduino microcontroller technology to automate the safe collection and disposal of medical waste. The system features sensor-based detection, automated sorting mechanisms, and safety protocols to minimize human contact with hazardous materials.</p>
+                    </div>
+                </div>
+
+                <!-- Project Gallery Section (Integrated) -->
+                <div id="gallery" style="margin-top: 3rem;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;"><i class="fas fa-images"></i> Project Gallery</h4>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <div class="gallery-img">
+                                <img src="3d-model.jpg" alt="3D Model" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="gallery-caption">3D Model Design</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <div class="gallery-img">
+                                <img src="actual-model.jpg" alt="Actual Model" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="gallery-caption">Actual Physical Model</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <div class="gallery-img">
+                                <img src="specification.jpg" alt="Specifications" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="gallery-caption">Technical Specifications</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-gray); margin-top: 1.5rem; font-size: 0.95rem;">
+                        <i class="fas fa-info-circle"></i> Click on any image to view in full screen
+                    </p>
                 </div>
             </div>
         </section>
@@ -620,8 +928,15 @@
     </div>
 
     <footer>
-        <p>© 2026 Glenn Wenand Arsemel Adorio. Built with HTML & CSS</p>
+        <p>© 2026 Glenn Wenand Adorio. Built with HTML & CSS</p>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Full screen image">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
 
     <script>
         function toggleTheme() {
@@ -629,6 +944,52 @@
             const icon = document.querySelector('.theme-btn i');
             icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
         }
+        
+        function openModal(element) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const caption = document.getElementById('modalCaption');
+            
+            const img = element.querySelector('img');
+            const captionText = element.querySelector('.gallery-caption').textContent;
+            
+            modal.classList.add('active');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            caption.textContent = captionText;
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            // Add fade out animation
+            modalImg.style.animation = 'zoomOut 0.3s ease-out';
+            modal.style.animation = 'fadeOut 0.3s ease-out';
+            
+            setTimeout(() => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                // Reset animations
+                modalImg.style.animation = '';
+                modal.style.animation = '';
+            }, 300);
+        }
+        
+        // Close modal when clicking outside the image
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
-</body>
-</html>
