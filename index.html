@@ -1042,6 +1042,115 @@
                 height: 120px;
             }
         }
+        
+        /* Scroll Animation Styles */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease-out;
+        }
+        
+        .fade-in.animate {
+            opacity: 1;
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .slide-in-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .slide-in-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .scale-in.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Stagger animation delays for grid items */
+        .fade-in-up.delay-1 { transition-delay: 0.1s; }
+        .fade-in-up.delay-2 { transition-delay: 0.2s; }
+        .fade-in-up.delay-3 { transition-delay: 0.3s; }
+        .fade-in-up.delay-4 { transition-delay: 0.4s; }
+        
+        /* Prevent animation on page load for hero */
+        .hero * {
+            animation: none !important;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+            z-index: 99;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .back-to-top.visible {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1080,16 +1189,16 @@
 
     <div class="container">
         <section id="about">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-box">
+            <h2 class="section-title fade-in-up">About Me</h2>
+            <div class="about-box fade-in-up delay-1">
                 <p>Computer Engineering graduate with hands-on experience in software development, networking, and cybersecurity. Passionate about creating innovative solutions using embedded systems and software engineering. Proven track record in academic research and IT implementation.</p>
             </div>
         </section>
 
         <section id="skills">
-            <h2 class="section-title">Technical Skills</h2>
+            <h2 class="section-title fade-in-up">Technical Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card">
+                <div class="skill-card fade-in-up delay-1">
                     <h3><i class="fas fa-code"></i> Programming Languages</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">C++</span>
@@ -1099,7 +1208,7 @@
                         <span class="skill-tag">Arduino IDE</span>
                     </div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card fade-in-up delay-2">
                     <h3><i class="fas fa-shield-alt"></i> Networking & Security</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">TCP/IP</span>
@@ -1109,7 +1218,7 @@
                         <span class="skill-tag">Penetration Testing</span>
                     </div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card fade-in-up delay-3">
                     <h3><i class="fas fa-server"></i> Operating Systems</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Linux (Ubuntu, Debian)</span>
@@ -1117,7 +1226,7 @@
                         <span class="skill-tag">Virtualization</span>
                     </div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card fade-in-up delay-4">
                     <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Microsoft Office</span>
@@ -1129,8 +1238,8 @@
         </section>
 
         <section id="projects">
-            <h2 class="section-title">Featured Project</h2>
-            <div class="project-card">
+            <h2 class="section-title fade-in-up">Featured Project</h2>
+            <div class="project-card fade-in-up delay-1">
                 <h3>Syringe Needle Collector Machine</h3>
                 <p>Award-winning automation solution using Arduino micro-controller to improve medical waste collection efficiency and safety. Recognized as Most Outstanding Research in Computer Engineering.</p>
                 <div class="tech-tags">
@@ -1140,7 +1249,7 @@
                 </div>
                 
                 <!-- Project Demo Section -->
-                <div class="demo-container">
+                <div class="demo-container fade-in delay-2">
                     <h4 style="color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-video"></i> Project Demo</h4>
                     <video class="demo-video" controls style="display: block;">
                         <source src="https://res.cloudinary.com/dnmwzxsuf/video/upload/v1769328963/compressedProject-Demo_b61ums.mp4" type="video/mp4">
@@ -1154,28 +1263,28 @@
 
                 <!-- Project Gallery Section (Integrated) -->
                 <div id="gallery" style="margin-top: 3rem;">
-                    <h4 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;"><i class="fas fa-images"></i> Project Gallery</h4>
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;" class="fade-in-up delay-1"><i class="fas fa-images"></i> Project Gallery</h4>
                     <div class="gallery-grid">
-                        <div class="gallery-item" onclick="openModal(this)">
+                        <div class="gallery-item fade-in-up delay-1" onclick="openModal(this)">
                             <div class="gallery-img">
                                 <img src="3d-model.jpg" alt="3D Model" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="gallery-caption">3D Model Design</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this)">
+                        <div class="gallery-item fade-in-up delay-2" onclick="openModal(this)">
                             <div class="gallery-img">
                                 <img src="actual-model.jpg" alt="Actual Model" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="gallery-caption">Actual Physical Model</div>
                         </div>
-                        <div class="gallery-item" onclick="openModal(this)">
+                        <div class="gallery-item fade-in-up delay-3" onclick="openModal(this)">
                             <div class="gallery-img">
                                 <img src="specification.jpg" alt="Specifications" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="gallery-caption">Technical Specifications</div>
                         </div>
                     </div>
-                    <p style="text-align: center; color: var(--text-gray); margin-top: 1.5rem; font-size: 0.95rem;">
+                    <p style="text-align: center; color: var(--text-gray); margin-top: 1.5rem; font-size: 0.95rem;" class="fade-in delay-4">
                         <i class="fas fa-info-circle"></i> Click on any image to view in full screen
                     </p>
                 </div>
@@ -1183,8 +1292,8 @@
         </section>
 
         <section id="awards">
-            <h2 class="section-title">Awards & Recognition</h2>
-            <div class="award-box">
+            <h2 class="section-title fade-in-up">Awards & Recognition</h2>
+            <div class="award-box fade-in-up delay-1">
                 <i class="fas fa-trophy award-icon"></i>
                 <div>
                     <h3>Most Outstanding Research in Computer Engineering</h3>
@@ -1195,8 +1304,8 @@
         </section>
 
         <section id="experience">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="exp-card">
+            <h2 class="section-title fade-in-up">Work Experience</h2>
+            <div class="exp-card fade-in-up delay-1">
                 <div class="exp-header">
                     <h3>Intern / IT Personnel</h3>
                     <p class="company">Technomotion Controls International</p>
@@ -1212,13 +1321,13 @@
         </section>
 
         <section id="education">
-            <h2 class="section-title">Education</h2>
-            <div class="edu-card">
+            <h2 class="section-title fade-in-up">Education</h2>
+            <div class="edu-card fade-in-up delay-1">
                 <h3>Bachelor of Science in Computer Engineering</h3>
                 <p class="school">Lyceum of the Philippines University - Cavite</p>
                 <p class="year">2019 - 2025</p>
             </div>
-            <div class="edu-card">
+            <div class="edu-card fade-in-up delay-2">
                 <h3>Science, Technology, Engineering and Mathematics (STEM)</h3>
                 <p class="school">Holy Family Academy of GMA Cavite</p>
                 <p class="year">2017 - 2019</p>
@@ -1226,17 +1335,17 @@
         </section>
 
         <section id="certifications">
-            <h2 class="section-title">Certifications & Training</h2>
+            <h2 class="section-title fade-in-up">Certifications & Training</h2>
             <div class="cert-grid">
-                <div class="cert-card">
+                <div class="cert-card fade-in-up delay-1">
                     <i class="fas fa-award"></i>
                     <p>Cyber Security Workshop - ICPEP.SE-LPUCPES</p>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card fade-in-up delay-2">
                     <i class="fas fa-award"></i>
                     <p>Cyber Security Awareness Seminar - LPU Cavite</p>
                 </div>
-                <div class="cert-card">
+                <div class="cert-card fade-in-up delay-3">
                     <i class="fas fa-award"></i>
                     <p>GIS & Geospatial Analysis with Python, Geopandas, Folium - Udemy</p>
                 </div>
@@ -1244,15 +1353,15 @@
         </section>
 
         <section id="contact">
-            <h2 class="section-title">Let's Connect</h2>
+            <h2 class="section-title fade-in-up">Let's Connect</h2>
             <div class="contact-box">
-                <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem;">I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
-                <div class="social-links">
-                    <a href="mailto:glennkoy0409@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/gwada0409" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem;" class="fade-in-up delay-1">I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
+                <div class="social-links fade-in-up delay-2">
+                    <a href="mailto:glennkoy0409@gmail.com" class="social-link scale-in"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/gwada0409" target="_blank" class="social-link scale-in delay-1"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" class="social-link scale-in delay-2"><i class="fab fa-linkedin"></i></a>
                 </div>
-                <div class="contact-info">
+                <div class="contact-info fade-in delay-3">
                     <p><i class="fas fa-envelope"></i> glennkoy0409@gmail.com</p>
                     <p><i class="fas fa-phone"></i> +63 906 199 5229</p>
                 </div>
@@ -1263,6 +1372,11 @@
     <footer>
         <p>© 2026 Glenn Wenand Arsemel Adorio. Built with HTML & CSS</p>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Image Modal -->
     <div id="imageModal" class="modal">
@@ -1357,6 +1471,49 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
+            }
+        });
+        
+        // Scroll Animation using Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    // Unobserve after animation to improve performance
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with animation classes
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
             }
         });
     </script>
