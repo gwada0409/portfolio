@@ -39,7 +39,7 @@
             width: 100%;
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 1.5rem;
+            padding: 1rem 2rem;
             z-index: 100;
             border-bottom: 1px solid rgba(59, 130, 246, 0.1);
         }
@@ -66,7 +66,7 @@
         
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             list-style: none;
             align-items: center;
         }
@@ -75,7 +75,6 @@
             color: var(--text-gray);
             text-decoration: none;
             transition: color 0.3s;
-            font-size: 0.95rem;
         }
         
         .nav-links a:hover {
@@ -88,7 +87,6 @@
             color: var(--text-light);
             font-size: 1.2rem;
             cursor: pointer;
-            padding: 0.5rem;
         }
         
         .hero {
@@ -96,14 +94,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6rem 1.5rem 4rem;
+            padding: 6rem 2rem 4rem;
             text-align: center;
             background: linear-gradient(135deg, var(--bg-dark) 0%, #1e3a8a 50%, var(--bg-dark) 100%);
         }
         
         .profile-img-container {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             margin: 0 auto 2rem auto;
             position: relative;
             cursor: pointer;
@@ -152,16 +150,15 @@
         }
         
         .hero h1 {
-            font-size: clamp(1.8rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--accent), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1.2;
         }
         
         .hero h2 {
-            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-size: clamp(1.5rem, 3vw, 2rem);
             color: var(--text-gray);
             margin-bottom: 1rem;
         }
@@ -169,7 +166,6 @@
         .hero p {
             color: var(--text-gray);
             margin-bottom: 2rem;
-            font-size: 1rem;
         }
         
         .cta-btns {
@@ -180,12 +176,11 @@
         }
         
         .btn {
-            padding: 0.9rem 1.8rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
-            font-size: 0.95rem;
         }
         
         .btn-primary {
@@ -212,17 +207,17 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 4rem 2rem;
         }
         
         section {
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
         
         .section-title {
-            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             background: linear-gradient(135deg, var(--accent), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -230,13 +225,13 @@
         
         .about-box {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         .about-box p {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--text-gray);
             line-height: 1.8;
         }
@@ -244,12 +239,12 @@
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
         }
         
         .skill-card {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 0.3s;
@@ -262,7 +257,6 @@
         .skill-card h3 {
             color: var(--accent);
             margin-bottom: 1rem;
-            font-size: 1.1rem;
         }
         
         .skill-tags {
@@ -277,12 +271,11 @@
             border-radius: 20px;
             color: var(--text-light);
             border: 1px solid rgba(59, 130, 246, 0.3);
-            font-size: 0.9rem;
         }
         
         .project-card {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 2rem;
@@ -291,13 +284,12 @@
         .project-card h3 {
             color: var(--accent);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
         
         .project-card p {
             color: var(--text-gray);
             margin-bottom: 1rem;
-            font-size: 0.95rem;
         }
         
         .tech-tags {
@@ -312,12 +304,13 @@
             padding: 0.4rem 0.8rem;
             border-radius: 15px;
             color: var(--accent-purple);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
+        /* Gallery Styles */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -337,7 +330,7 @@
         
         .gallery-img {
             width: 100%;
-            height: 220px;
+            height: 250px;
             object-fit: cover;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
             display: flex;
@@ -351,9 +344,9 @@
             padding: 1rem;
             text-align: center;
             color: var(--text-gray);
-            font-size: 0.9rem;
         }
         
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -407,16 +400,16 @@
         .close-modal {
             position: absolute;
             top: 20px;
-            right: 20px;
+            right: 40px;
             color: #fff;
-            font-size: 35px;
+            font-size: 40px;
             font-weight: bold;
             cursor: pointer;
             z-index: 1001;
             transition: all 0.3s;
             background: rgba(0,0,0,0.5);
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -438,10 +431,8 @@
             background: rgba(0,0,0,0.7);
             padding: 10px 20px;
             border-radius: 20px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             animation: slideUp 0.5s ease-out 0.2s both;
-            max-width: 90%;
-            text-align: center;
         }
         
         @keyframes slideUp {
@@ -475,15 +466,12 @@
             }
         }
         
+        /* Project Demo Styles */
         .demo-container {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        .demo-container h4 {
-            font-size: 1.1rem;
         }
         
         .demo-video {
@@ -509,7 +497,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 0.9rem;
         }
         
         .demo-btn:hover {
@@ -528,45 +515,39 @@
         .demo-description h4 {
             color: var(--accent);
             margin-bottom: 0.5rem;
-            font-size: 1rem;
         }
         
         .demo-description p {
             color: var(--text-gray);
             line-height: 1.6;
-            font-size: 0.95rem;
         }
         
         .award-box {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: flex;
             gap: 1.5rem;
-            align-items: flex-start;
         }
         
         .award-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #fbbf24;
-            flex-shrink: 0;
         }
         
         .award-box h3 {
             color: var(--accent);
             margin-bottom: 0.5rem;
-            font-size: 1.1rem;
         }
         
         .award-box p {
             color: var(--text-gray);
-            font-size: 0.95rem;
         }
         
         .exp-card {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 2rem;
@@ -578,17 +559,16 @@
         
         .exp-header h3 {
             color: var(--accent);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         
         .exp-header .company {
             color: var(--text-light);
-            font-size: 1rem;
         }
         
         .exp-header .duration {
             color: var(--text-gray);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
         .exp-card ul {
@@ -601,7 +581,6 @@
             margin-bottom: 0.5rem;
             padding-left: 1.5rem;
             position: relative;
-            font-size: 0.95rem;
         }
         
         .exp-card li:before {
@@ -613,7 +592,7 @@
         
         .edu-card {
             background: var(--bg-card);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 1.5rem;
@@ -622,23 +601,20 @@
         .edu-card h3 {
             color: var(--accent);
             margin-bottom: 0.5rem;
-            font-size: 1.1rem;
         }
         
         .edu-card .school {
             color: var(--text-light);
             margin-bottom: 0.5rem;
-            font-size: 0.95rem;
         }
         
         .edu-card .year {
             color: var(--text-gray);
-            font-size: 0.9rem;
         }
         
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
         }
         
@@ -655,12 +631,10 @@
         .cert-card i {
             color: var(--accent);
             font-size: 1.5rem;
-            flex-shrink: 0;
         }
         
         .cert-card p {
             color: var(--text-gray);
-            font-size: 0.9rem;
         }
         
         .contact-box {
@@ -672,12 +646,11 @@
             justify-content: center;
             gap: 1.5rem;
             margin: 2rem 0;
-            flex-wrap: wrap;
         }
         
         .social-link {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             background: var(--bg-card);
             border-radius: 50%;
             display: flex;
@@ -694,7 +667,7 @@
         
         .social-link i {
             color: var(--accent);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
         
         .social-link:hover i {
@@ -704,151 +677,34 @@
         .contact-info p {
             color: var(--text-gray);
             margin: 0.5rem 0;
-            font-size: 0.95rem;
         }
         
         footer {
             background: var(--bg-card);
-            padding: 2rem 1.5rem;
+            padding: 2rem;
             text-align: center;
             color: var(--text-gray);
-            font-size: 0.9rem;
         }
         
-        /* Mobile Specific Optimizations */
         @media (max-width: 768px) {
-            nav {
-                padding: 0.8rem 1rem;
-            }
-            
-            .logo {
-                font-size: 1.3rem;
-            }
-            
             .nav-links {
-                gap: 0.8rem;
-                font-size: 0.85rem;
-            }
-            
-            .nav-links a {
-                font-size: 0.85rem;
-            }
-            
-            .theme-btn {
-                font-size: 1.1rem;
-                padding: 0.3rem;
-            }
-            
-            .hero {
-                padding: 5rem 1rem 3rem;
-            }
-            
-            .profile-img-container {
-                width: 150px;
-                height: 150px;
-                margin-bottom: 1.5rem;
-            }
-            
-            .cta-btns {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .container {
-                padding: 2.5rem 1rem;
-            }
-            
-            section {
-                margin-bottom: 3rem;
-            }
-            
-            .section-title {
-                margin-bottom: 2rem;
+                gap: 1rem;
+                font-size: 0.9rem;
             }
             
             .skills-grid, .cert-grid, .gallery-grid {
                 grid-template-columns: 1fr;
-                gap: 1.2rem;
             }
             
             .award-box {
                 flex-direction: column;
                 text-align: center;
-                align-items: center;
-            }
-            
-            .award-icon {
-                font-size: 2.5rem;
-            }
-            
-            .gallery-img {
-                height: 200px;
             }
             
             .close-modal {
                 top: 10px;
-                right: 10px;
-                font-size: 28px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .modal-caption {
-                bottom: 20px;
-                font-size: 0.9rem;
-                padding: 8px 15px;
-            }
-            
-            .demo-container {
-                padding: 1.2rem;
-            }
-            
-            .project-card {
-                padding: 1.2rem;
-            }
-            
-            .skill-card, .exp-card, .edu-card {
-                padding: 1.2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-            
-            .hero h2 {
-                font-size: 1.1rem;
-            }
-            
-            .nav-links a {
-                display: none;
-            }
-            
-            .nav-links a:nth-child(1),
-            .nav-links a:nth-child(5) {
-                display: block;
-            }
-            
-            .profile-img-container {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .social-link {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .social-link i {
-                font-size: 1.2rem;
+                right: 20px;
+                font-size: 30px;
             }
         }
     </style>
@@ -945,7 +801,193 @@
                     <span class="tech-tag">Automation</span>
                 </div>
                 
+                <!-- Project Demo Section -->
                 <div class="demo-container">
                     <h4 style="color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-video"></i> Project Demo</h4>
                     <video class="demo-video" controls style="display: block;">
-                        <source src="https://res.clou
+                        <source src="https://res.cloudinary.com/dnmwzxsuf/video/upload/v1769328963/compressedProject-Demo_b61ums.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="demo-description">
+                        <h4>How It Works</h4>
+                        <p>The Syringe Needle Collector Machine utilizes Arduino microcontroller technology to automate the safe collection and disposal of medical waste. The system features sensor-based detection, automated sorting mechanisms, and safety protocols to minimize human contact with hazardous materials.</p>
+                    </div>
+                </div>
+
+                <!-- Project Gallery Section (Integrated) -->
+                <div id="gallery" style="margin-top: 3rem;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;"><i class="fas fa-images"></i> Project Gallery</h4>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <div class="gallery-img">
+                                <img src="3d-model.jpg" alt="3D Model" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="gallery-caption">3D Model Design</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <div class="gallery-img">
+                                <img src="actual-model.jpg" alt="Actual Model" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="gallery-caption">Actual Physical Model</div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <div class="gallery-img">
+                                <img src="specification.jpg" alt="Specifications" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="gallery-caption">Technical Specifications</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-gray); margin-top: 1.5rem; font-size: 0.95rem;">
+                        <i class="fas fa-info-circle"></i> Click on any image to view in full screen
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="awards">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <div class="award-box">
+                <i class="fas fa-trophy award-icon"></i>
+                <div>
+                    <h3>Most Outstanding Research in Computer Engineering</h3>
+                    <p>Syringe Needle Collector Machine Using Arduino Micro-Controller</p>
+                    <p><small>10th LPU-Cavite College of Engineering Research Colloquium</small></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Intern / IT Personnel</h3>
+                    <p class="company">Technomotion Controls International</p>
+                    <p class="duration">July 13 - August 23, 2023</p>
+                </div>
+                <ul>
+                    <li>Gained practical experience in IT infrastructure and system administration</li>
+                    <li>Assisted with network configuration and troubleshooting</li>
+                    <li>Applied cybersecurity principles in real-world enterprise environment</li>
+                    <li>Supported technical operations and system maintenance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="edu-card">
+                <h3>Bachelor of Science in Computer Engineering</h3>
+                <p class="school">Lyceum of the Philippines University - Cavite</p>
+                <p class="year">2019 - 2025</p>
+            </div>
+            <div class="edu-card">
+                <h3>Science, Technology, Engineering and Mathematics (STEM)</h3>
+                <p class="school">Holy Family Academy of GMA Cavite</p>
+                <p class="year">2017 - 2019</p>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2 class="section-title">Certifications & Training</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <i class="fas fa-award"></i>
+                    <p>Cyber Security Workshop - ICPEP.SE-LPUCPES</p>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-award"></i>
+                    <p>Cyber Security Awareness Seminar - LPU Cavite</p>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-award"></i>
+                    <p>GIS & Geospatial Analysis with Python, Geopandas, Folium - Udemy</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-box">
+                <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem;">I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
+                <div class="social-links">
+                    <a href="mailto:glennkoy0409@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/gwada0409" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> glennkoy0409@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +63 906 199 5229</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 Glenn Wenand Arsemel Adorio. Built with HTML & CSS</p>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Full screen image">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.querySelector('.theme-btn i');
+            icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        function openModal(element) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const caption = document.getElementById('modalCaption');
+            
+            const img = element.querySelector('img');
+            const captionText = element.querySelector('.gallery-caption').textContent;
+            
+            modal.classList.add('active');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            caption.textContent = captionText;
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            // Add fade out animation
+            modalImg.style.animation = 'zoomOut 0.3s ease-out';
+            modal.style.animation = 'fadeOut 0.3s ease-out';
+            
+            setTimeout(() => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                // Reset animations
+                modalImg.style.animation = '';
+                modal.style.animation = '';
+            }, 300);
+        }
+        
+        // Close modal when clicking outside the image
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+
+
