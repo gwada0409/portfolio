@@ -1158,9 +1158,393 @@
                 font-size: 1rem;
             }
         }
+        
+        /* Game Mode Styles */
+        .game-mode-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 200;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .game-mode-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
+        }
+        
+        
+        .game-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            z-index: 150;
+            overflow: hidden;
+        }
+        
+        .game-container.active {
+            display: block;
+        }
+        
+        .game-road {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                #2a2a3e 0px,
+                #2a2a3e 50px,
+                #1a1a2e 50px,
+                #1a1a2e 100px
+            );
+            background-size: 200px 100%;
+        }
+        
+        .road-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 98px,
+                #ffd700 98px,
+                #ffd700 102px,
+                transparent 102px,
+                transparent 200px
+            );
+        }
+        
+        .car {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-image: url('car.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform-origin: center;
+            transition: transform 0.1s linear;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        .checkpoint {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.6));
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+            z-index: 5;
+        }
+        
+        .checkpoint:hover {
+            transform: scale(1.1);
+        }
+        
+        .checkpoint.reached {
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.8), rgba(22, 163, 74, 0.6));
+            border-color: #22c55e;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.8);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .game-info {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            opacity: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .game-info.minimized {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+        
+        .game-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .game-info p {
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+        
+        .portfolio-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            z-index: 300;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none;
+            animation: popupIn 0.3s ease-out;
+        }
+        
+        .portfolio-popup.active {
+            display: block;
+        }
+        
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .popup-close:hover {
+            color: var(--accent);
+        }
+        
+        .game-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            z-index: 20;
+            opacity: 1;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .game-controls.minimized {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+            pointer-events: none;
+        }
+        
+        .controls-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-btn:active {
+            background: var(--accent);
+            transform: scale(0.95);
+        }
+        
+        /* Joystick Styles */
+        .joystick-container {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 120px;
+            height: 120px;
+            display: none;
+            z-index: 20;
+        }
+        
+        .joystick-base {
+            width: 120px;
+            height: 120px;
+            background: rgba(0,0,0,0.6);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+        
+        .joystick-stick {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            cursor: grab;
+        }
+        
+        .joystick-stick:active {
+            cursor: grabbing;
+        }
+        
+        .joystick-stick.active {
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .joystick-container {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .game-mode-toggle {
+                top: 70px;
+                right: 10px;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .game-info {
+                top: 80px;
+                left: 10px;
+                padding: 0.75rem;
+                font-size: 0.85rem;
+            }
+            
+            .car {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .checkpoint {
+                width: 60px;
+                height: 60px;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="game-mode-toggle" onclick="toggleGameMode()" id="gameToggle">
+        <i class="fas fa-gamepad"></i> Game Mode
+    </button>
+    
+    <!-- Game Container -->
+    <div class="game-container" id="gameContainer">
+        <button class="game-mode-toggle" onclick="toggleGameMode()" style="position: absolute; top: 20px; right: 20px; z-index: 200;">
+            <i class="fas fa-times"></i> Exit Game
+        </button>
+        
+        <div class="game-road"></div>
+        <div class="road-lines"></div>
+        
+        <div class="game-info" id="gameInfo">
+            <h3><i class="fas fa-info-circle"></i> Game Controls</h3>
+            <p id="controlInstructions">WASD or Arrow Keys to move</p>
+            <p>Drive to checkpoints to explore!</p>
+        </div>
+        
+        <div class="car" id="car"></div>
+        
+        <!-- Checkpoints -->
+        <div class="checkpoint" id="checkpoint-about" style="top: 20%; left: 10%;" onclick="showPortfolioSection('about')">
+            About
+        </div>
+        <div class="checkpoint" id="checkpoint-skills" style="top: 40%; left: 30%;" onclick="showPortfolioSection('skills')">
+            Skills
+        </div>
+        <div class="checkpoint" id="checkpoint-projects" style="top: 60%; left: 50%;" onclick="showPortfolioSection('projects')">
+            Projects
+        </div>
+        <div class="checkpoint" id="checkpoint-awards" style="top: 30%; left: 70%;" onclick="showPortfolioSection('awards')">
+            Awards
+        </div>
+        <div class="checkpoint" id="checkpoint-contact" style="top: 70%; left: 85%;" onclick="showPortfolioSection('contact')">
+            Contact
+        </div>
+        
+        <!-- Mobile Controls - Arrow Buttons (Hidden on desktop) -->
+        <div class="game-controls" id="gameControls">
+            <div class="controls-row">
+                <button class="control-btn" onmousedown="startMove('up')" onmouseup="stopMove()" ontouchstart="startMove('up')" ontouchend="stopMove()">↑</button>
+            </div>
+            <div class="controls-row">
+                <button class="control-btn" onmousedown="startMove('left')" onmouseup="stopMove()" ontouchstart="startMove('left')" ontouchend="stopMove()">←</button>
+                <button class="control-btn" onmousedown="startMove('down')" onmouseup="stopMove()" ontouchstart="startMove('down')" ontouchend="stopMove()">↓</button>
+                <button class="control-btn" onmousedown="startMove('right')" onmouseup="stopMove()" ontouchstart="startMove('right')" ontouchend="stopMove()">→</button>
+            </div>
+        </div>
+        
+        <!-- Mobile Joystick -->
+        <div class="joystick-container" id="joystickContainer">
+            <div class="joystick-base">
+                <div class="joystick-stick" id="joystickStick"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Portfolio Popup -->
+    <div class="portfolio-popup" id="portfolioPopup">
+        <button class="popup-close" onclick="closePortfolioPopup()">&times;</button>
+        <div id="popupContent"></div>
+    </div>
+    
     <nav>
         <div class="nav-content">
             <div class="logo">GA</div>
@@ -1250,8 +1634,7 @@
                 <h3>Syringe Needle Collector Machine</h3>
                 <p>Award-winning automation solution using Arduino micro-controller to improve medical waste collection efficiency and safety. Recognized as Most Outstanding Research in Computer Engineering.</p>
                 <div class="tech-tags">
-                    <span class="tech-tag">Arduino</span>
-                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Arduino IDE</span>
                     <span class="tech-tag">Embedded Systems</span>
                     <span class="tech-tag">Automation</span>
                 </div>
@@ -1479,6 +1862,437 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
+                closePortfolioPopup();
+            }
+        });
+        
+        // ========== GAME MODE FUNCTIONS ==========
+        let gameActive = false;
+        let carPosition = { x: 50, y: 50 };
+        let carSpeed = 3;
+        let keys = {};
+        let moveInterval = null;
+        let currentCheckpoint = null;
+        let joystickActive = false;
+        let joystickPosition = { x: 0, y: 0 };
+        let gameInfoTimeout = null;
+        
+        function toggleGameMode() {
+            gameActive = !gameActive;
+            const gameContainer = document.getElementById('gameContainer');
+            const gameToggle = document.getElementById('gameToggle');
+            
+            if (gameActive) {
+                gameContainer.classList.add('active');
+                gameToggle.style.display = 'none'; // Hide when in game
+                document.body.style.overflow = 'hidden';
+                initializeCar();
+                startGameLoop();
+                initializeJoystick();
+                minimizeGameInfoAfterDelay();
+            } else {
+                gameContainer.classList.remove('active');
+                gameToggle.innerHTML = '<i class="fas fa-gamepad"></i> Game Mode';
+                gameToggle.style.display = 'block'; // Show when not in game
+                document.body.style.overflow = 'auto';
+                stopGameLoop();
+                closePortfolioPopup();
+                resetAllCheckpoints();
+                resetJoystick();
+                if (gameInfoTimeout) {
+                    clearTimeout(gameInfoTimeout);
+                    gameInfoTimeout = null;
+                }
+                const gameInfo = document.getElementById('gameInfo');
+                if (gameInfo) {
+                    gameInfo.classList.remove('minimized');
+                }
+            }
+        }
+        
+        function initializeCar() {
+            const car = document.getElementById('car');
+            const gameContainer = document.getElementById('gameContainer');
+            // Start car in center-bottom area
+            carPosition.x = (gameContainer.offsetWidth / 2) - 40;
+            carPosition.y = gameContainer.offsetHeight - 120;
+            car.style.left = carPosition.x + 'px';
+            car.style.top = carPosition.y + 'px';
+        }
+        
+        function startGameLoop() {
+            moveInterval = setInterval(() => {
+                moveCar();
+                checkCheckpointCollisions();
+            }, 16); // ~60fps
+        }
+        
+        function stopGameLoop() {
+            if (moveInterval) {
+                clearInterval(moveInterval);
+                moveInterval = null;
+            }
+            keys = {};
+        }
+        
+        function moveCar() {
+            const car = document.getElementById('car');
+            const gameContainer = document.getElementById('gameContainer');
+            const containerRect = gameContainer.getBoundingClientRect();
+            
+            let newX = carPosition.x;
+            let newY = carPosition.y;
+            let isMoving = false;
+            
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) {
+                newY = Math.max(0, carPosition.y - carSpeed);
+                isMoving = true;
+            }
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) {
+                newY = Math.min(containerRect.height - 80, carPosition.y + carSpeed);
+                isMoving = true;
+            }
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
+                newX = Math.max(0, carPosition.x - carSpeed);
+                isMoving = true;
+            }
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) {
+                newX = Math.min(containerRect.width - 80, carPosition.x + carSpeed);
+                isMoving = true;
+            }
+            
+            // Minimize controls when car starts moving
+            if (isMoving) {
+                minimizeGameControls();
+            }
+            
+            carPosition.x = newX;
+            carPosition.y = newY;
+            
+            car.style.left = carPosition.x + 'px';
+            car.style.top = carPosition.y + 'px';
+        }
+        
+        function minimizeGameControls() {
+            const gameControls = document.getElementById('gameControls');
+            if (gameControls && !gameControls.classList.contains('minimized')) {
+                gameControls.classList.add('minimized');
+            }
+        }
+        
+        function checkCheckpointCollisions() {
+            const car = document.getElementById('car');
+            const carRect = car.getBoundingClientRect();
+            const checkpoints = document.querySelectorAll('.checkpoint');
+            let isNearCheckpoint = false;
+            let nearestCheckpoint = null;
+            
+            checkpoints.forEach(checkpoint => {
+                const checkpointRect = checkpoint.getBoundingClientRect();
+                
+                // Calculate center points for better collision detection
+                const carCenterX = carRect.left + carRect.width / 2;
+                const carCenterY = carRect.top + carRect.height / 2;
+                const checkpointCenterX = checkpointRect.left + checkpointRect.width / 2;
+                const checkpointCenterY = checkpointRect.top + checkpointRect.height / 2;
+                
+                const distance = Math.sqrt(
+                    Math.pow(carCenterX - checkpointCenterX, 2) + 
+                    Math.pow(carCenterY - checkpointCenterY, 2)
+                );
+                
+                // Check if car is within checkpoint radius
+                if (distance < 60) {
+                    isNearCheckpoint = true;
+                    nearestCheckpoint = checkpoint;
+                    
+                    if (!checkpoint.classList.contains('reached')) {
+                        checkpoint.classList.add('reached');
+                        currentCheckpoint = checkpoint;
+                        const sectionId = checkpoint.id.replace('checkpoint-', '');
+                        // Small delay for visual feedback
+                        setTimeout(() => {
+                            showPortfolioSection(sectionId);
+                        }, 300);
+                    }
+                } else {
+                    // Reset checkpoint if car moves away
+                    if (checkpoint === currentCheckpoint) {
+                        checkpoint.classList.remove('reached');
+                        currentCheckpoint = null;
+                        closePortfolioPopup();
+                    }
+                }
+            });
+            
+            // Close popup if car moves away from all checkpoints
+            if (!isNearCheckpoint && currentCheckpoint) {
+                currentCheckpoint.classList.remove('reached');
+                currentCheckpoint = null;
+                closePortfolioPopup();
+            }
+        }
+        
+        // Keyboard event listeners
+        document.addEventListener('keydown', function(e) {
+            if (gameActive) {
+                keys[e.key] = true;
+                e.preventDefault();
+            }
+        });
+        
+        document.addEventListener('keyup', function(e) {
+            if (gameActive) {
+                keys[e.key] = false;
+            }
+        });
+        
+        // Mobile touch controls
+        function startMove(direction) {
+            if (!gameActive) return;
+            
+            const keyMap = {
+                'up': 'ArrowUp',
+                'down': 'ArrowDown',
+                'left': 'ArrowLeft',
+                'right': 'ArrowRight'
+            };
+            
+            keys[keyMap[direction]] = true;
+        }
+        
+        function stopMove() {
+            keys = {};
+        }
+        
+        // Portfolio section display
+        const portfolioData = {
+            about: {
+                title: 'About Me',
+                content: '<p>Computer Engineering graduate with hands-on experience in software development, networking, and cybersecurity. Passionate about creating innovative solutions using embedded systems and software engineering. Proven track record in academic research and IT implementation.</p>'
+            },
+            skills: {
+                title: 'Technical Skills',
+                content: `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-code"></i> Programming</h4>
+                            <p>C++, C#, Java, Python, Arduino IDE</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-shield-alt"></i> Security</h4>
+                            <p>TCP/IP, DNS, VPNs, Firewalls, Penetration Testing</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-server"></i> Systems</h4>
+                            <p>Linux, Windows Server, Virtualization</p>
+                        </div>
+                    </div>
+                `
+            },
+            projects: {
+                title: 'Featured Project',
+                content: `
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">Syringe Needle Collector Machine</h3>
+                    <p>Award-winning automation solution using Arduino micro-controller to improve medical waste collection efficiency and safety. Recognized as Most Outstanding Research in Computer Engineering.</p>
+                    <div style="margin-top: 1rem;">
+                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem; margin-right: 0.5rem;">Arduino IDE</span>
+                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem; margin-right: 0.5rem;">Embedded Systems</span>
+                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem;">Automation</span>
+                    </div>
+                `
+            },
+            awards: {
+                title: 'Awards & Recognition',
+                content: `
+                    <div style="display: flex; gap: 1.5rem; align-items: center; margin-top: 1rem;">
+                        <i class="fas fa-trophy" style="font-size: 3rem; color: #fbbf24;"></i>
+                        <div>
+                            <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Most Outstanding Research in Computer Engineering</h3>
+                            <p>Syringe Needle Collector Machine Using Arduino Micro-Controller</p>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;"><small>10th LPU-Cavite College of Engineering Research Colloquium</small></p>
+                        </div>
+                    </div>
+                `
+            },
+            contact: {
+                title: "Let's Connect",
+                content: `
+                    <p style="margin-bottom: 1.5rem;">I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0;">
+                        <a href="mailto:glennkoy0409@gmail.com" style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; transition: all 0.3s;">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://github.com/gwada0409" target="_blank" style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; transition: all 0.3s;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; transition: all 0.3s;">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <div style="text-align: center; color: var(--text-gray);">
+                        <p><i class="fas fa-envelope"></i> glennkoy0409@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +63 906 199 5229</p>
+                    </div>
+                `
+            }
+        };
+        
+        function showPortfolioSection(sectionId) {
+            const popup = document.getElementById('portfolioPopup');
+            const popupContent = document.getElementById('popupContent');
+            const data = portfolioData[sectionId];
+            
+            if (data) {
+                popupContent.innerHTML = `
+                    <h2 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">${data.title}</h2>
+                    ${data.content}
+                `;
+                popup.classList.add('active');
+            }
+        }
+        
+        function closePortfolioPopup() {
+            const popup = document.getElementById('portfolioPopup');
+            popup.classList.remove('active');
+            // Reset checkpoint color when popup closes
+            if (currentCheckpoint) {
+                currentCheckpoint.classList.remove('reached');
+                currentCheckpoint = null;
+            }
+        }
+        
+        function resetAllCheckpoints() {
+            const checkpoints = document.querySelectorAll('.checkpoint');
+            checkpoints.forEach(checkpoint => {
+                checkpoint.classList.remove('reached');
+            });
+            currentCheckpoint = null;
+        }
+        
+        function minimizeGameInfoAfterDelay() {
+            const gameInfo = document.getElementById('gameInfo');
+            const controlInstructions = document.getElementById('controlInstructions');
+            
+            if (gameInfo) {
+                // Update instructions based on device type
+                if (window.innerWidth <= 768 && controlInstructions) {
+                    controlInstructions.textContent = 'Use joystick to move';
+                } else if (controlInstructions) {
+                    controlInstructions.textContent = 'WASD or Arrow Keys to move';
+                }
+                
+                gameInfo.classList.remove('minimized');
+                if (gameInfoTimeout) {
+                    clearTimeout(gameInfoTimeout);
+                }
+                gameInfoTimeout = setTimeout(() => {
+                    gameInfo.classList.add('minimized');
+                }, 5000);
+            }
+        }
+        
+        function initializeJoystick() {
+            const joystickStick = document.getElementById('joystickStick');
+            const joystickBase = document.querySelector('.joystick-base');
+            if (!joystickStick || !joystickBase) return;
+            
+            const baseRect = joystickBase.getBoundingClientRect();
+            const baseCenterX = baseRect.left + baseRect.width / 2;
+            const baseCenterY = baseRect.top + baseRect.height / 2;
+            const maxDistance = 35; // Maximum distance stick can move from center
+            
+            let touchId = null;
+            
+            function handleStart(e) {
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                touchId = touch.identifier || 'mouse';
+                joystickActive = true;
+                joystickStick.classList.add('active');
+                updateJoystick(touch);
+            }
+            
+            function handleMove(e) {
+                if (!joystickActive) return;
+                e.preventDefault();
+                const touch = e.touches ? 
+                    Array.from(e.touches).find(t => t.identifier === touchId) : e;
+                if (touch) {
+                    updateJoystick(touch);
+                }
+            }
+            
+            function handleEnd(e) {
+                if (!joystickActive) return;
+                e.preventDefault();
+                joystickActive = false;
+                joystickStick.classList.remove('active');
+                joystickPosition = { x: 0, y: 0 };
+                joystickStick.style.transform = 'translate(-50%, -50%)';
+                keys['ArrowUp'] = false;
+                keys['ArrowDown'] = false;
+                keys['ArrowLeft'] = false;
+                keys['ArrowRight'] = false;
+            }
+            
+            function updateJoystick(touch) {
+                const clientX = touch.clientX;
+                const clientY = touch.clientY;
+                
+                const deltaX = clientX - baseCenterX;
+                const deltaY = clientY - baseCenterY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                
+                if (distance > maxDistance) {
+                    const angle = Math.atan2(deltaY, deltaX);
+                    joystickPosition.x = Math.cos(angle) * maxDistance;
+                    joystickPosition.y = Math.sin(angle) * maxDistance;
+                } else {
+                    joystickPosition.x = deltaX;
+                    joystickPosition.y = deltaY;
+                }
+                
+                joystickStick.style.transform = `translate(calc(-50% + ${joystickPosition.x}px), calc(-50% + ${joystickPosition.y}px))`;
+                
+                // Update movement keys based on joystick position
+                const threshold = 15;
+                keys['ArrowUp'] = joystickPosition.y < -threshold;
+                keys['ArrowDown'] = joystickPosition.y > threshold;
+                keys['ArrowLeft'] = joystickPosition.x < -threshold;
+                keys['ArrowRight'] = joystickPosition.x > threshold;
+            }
+            
+            // Touch events
+            joystickBase.addEventListener('touchstart', handleStart, { passive: false });
+            document.addEventListener('touchmove', handleMove, { passive: false });
+            document.addEventListener('touchend', handleEnd, { passive: false });
+            document.addEventListener('touchcancel', handleEnd, { passive: false });
+            
+            // Mouse events for testing
+            joystickBase.addEventListener('mousedown', handleStart);
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', handleEnd);
+        }
+        
+        function resetJoystick() {
+            joystickActive = false;
+            joystickPosition = { x: 0, y: 0 };
+            const joystickStick = document.getElementById('joystickStick');
+            if (joystickStick) {
+                joystickStick.style.transform = 'translate(-50%, -50%)';
+                joystickStick.classList.remove('active');
+            }
+            keys['ArrowUp'] = false;
+            keys['ArrowDown'] = false;
+            keys['ArrowLeft'] = false;
+            keys['ArrowRight'] = false;
+        }
+        
+        // Close popup when clicking outside
+        document.getElementById('portfolioPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePortfolioPopup();
             }
         });
         
@@ -1525,7 +2339,6 @@
             }
         });
     </script>
-
 
 
 
