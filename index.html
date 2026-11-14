@@ -2,2469 +2,736 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-light: #f1f5f9;
-            --text-gray: #94a3b8;
-            --accent: #3b82f6;
-            --accent-purple: #8b5cf6;
-        }
-
-        body.light-mode {
-            --bg-dark: #f5f7fa;
-            --bg-card: #fafbfc;
-            --text-light: #2d3748;
-            --text-gray: #4a5568;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 100;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-        }
-
-        body.light-mode nav {
-            background: rgba(245, 247, 250, 0.95);
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 60px;
-            width: auto;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .logo-img:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-gray);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .theme-btn {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, #1e3a8a 50%, var(--bg-dark) 100%);
-        }
-
-        body.light-mode .hero {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #f5f7fa 100%);
-        }
-
-        .profile-img-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem auto;
-            position: relative;
-            cursor: pointer;
-        }
-
-        @media (max-width: 480px) {
-            .profile-img-container {
-                width: 150px;
-                height: 150px;
-                margin-top: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .profile-img-container {
-                margin-top: 2rem;
-            }
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-            border: 4px solid var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .profile-img-main {
-            z-index: 2;
-        }
-
-        .profile-img-hover {
-            z-index: 1;
-            opacity: 0;
-        }
-
-        .profile-img-container:hover .profile-img-main {
-            opacity: 0;
-            transform: scale(1.05) rotate(5deg);
-        }
-
-        .profile-img-container:hover .profile-img-hover {
-            opacity: 1;
-            transform: scale(1.05) rotate(-5deg);
-        }
-
-        .profile-img-container:hover {
-            animation: profilePulse 0.6s ease-in-out;
-        }
-
-        @keyframes profilePulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero h2 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-
-        body.light-mode .hero h2,
-        body.light-mode .hero p {
-            color: #4a5568;
-        }
-
-        /* Soften shadows and add subtle borders in light mode */
-        body.light-mode .about-box,
-        body.light-mode .skill-card,
-        body.light-mode .project-card,
-        body.light-mode .exp-card,
-        body.light-mode .edu-card,
-        body.light-mode .cert-card,
-        body.light-mode .award-box,
-        body.light-mode .demo-container,
-        body.light-mode .gallery-item {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        body.light-mode footer {
-            background: #f0f2f5;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        body.light-mode .social-link {
-            background: #f0f2f5;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        body.light-mode .social-link:hover {
-            background: var(--accent);
-        }
-
-        body.light-mode .btn-secondary {
-            background: #f0f2f5;
-            border-color: var(--accent);
-        }
-
-        body.light-mode .btn-secondary:hover {
-            background: var(--accent);
-        }
-
-        .cta-btns {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-light);
-            border: 2px solid var(--accent);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        section {
-            margin-bottom: 5rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 3rem 1.5rem;
-            }
-
-            section {
-                margin-bottom: 3rem;
-            }
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .about-box {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .about-box p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-
-        @media (max-width: 768px) {
-            .about-box {
-                padding: 1.5rem;
-            }
-
-            .about-box p {
-                font-size: 1rem;
-            }
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-        }
-
-        @media (max-width: 768px) {
-            .skill-card {
-                padding: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .skill-card {
-                padding: 1.25rem;
-            }
-        }
-
-        .skill-card h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: rgba(59, 130, 246, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            color: var(--text-light);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .project-card h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .project-card p {
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .project-card {
-                padding: 1.5rem;
-            }
-
-            .project-card h3 {
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .project-card {
-                padding: 1.25rem;
-            }
-
-            .project-card h3 {
-                font-size: 1.2rem;
-            }
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(139, 92, 246, 0.1);
-            padding: 0.4rem 0.8rem;
-            border-radius: 15px;
-            color: var(--accent-purple);
-            font-size: 0.9rem;
-        }
-
-        /* Gallery Styles */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .gallery-item {
-            background: var(--bg-card);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        .gallery-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-gray);
-            font-size: 3rem;
-        }
-
-        .gallery-caption {
-            padding: 1rem;
-            text-align: center;
-            color: var(--text-gray);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            animation: fadeIn 0.3s;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                backdrop-filter: blur(0px);
-            }
-
-            to {
-                opacity: 1;
-                backdrop-filter: blur(10px);
-            }
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 90vh;
-            object-fit: contain;
-            animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1001;
-            transition: all 0.3s;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-modal:hover {
-            color: var(--accent);
-            background: rgba(59, 130, 246, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .modal-caption {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 1.1rem;
-            animation: slideUp 0.5s ease-out 0.2s both;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateX(-50%) translateY(20px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(-50%) translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes zoomOut {
-            from {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            to {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-        }
-
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-
-            to {
-                opacity: 0;
-            }
-        }
-
-        /* Project Demo Styles */
-        .demo-container {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .demo-video {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .demo-container {
-                padding: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .demo-container {
-                padding: 1rem;
-            }
-        }
-
-        .demo-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .demo-btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            border: none;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .demo-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
-        }
-
-        .demo-description {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: rgba(59, 130, 246, 0.05);
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .demo-description h4 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .demo-description p {
-            color: var(--text-gray);
-            line-height: 1.6;
-        }
-
-        .award-box {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .award-icon {
-            font-size: 3rem;
-            color: #fbbf24;
-        }
-
-        .award-box h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .award-box p {
-            color: var(--text-gray);
-        }
-
-        .exp-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .exp-header {
-            margin-bottom: 1rem;
-        }
-
-        .exp-header h3 {
-            color: var(--accent);
-            font-size: 1.3rem;
-        }
-
-        .exp-header .company {
-            color: var(--text-light);
-        }
-
-        .exp-header .duration {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        .exp-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .exp-card li {
-            color: var(--text-gray);
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .exp-card li:before {
-            content: "▹";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-        }
-
-        .edu-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1.5rem;
-        }
-
-        .edu-card h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .edu-card .school {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .edu-card .year {
-            color: var(--text-gray);
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .cert-card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .cert-card i {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
-        .cert-card p {
-            color: var(--text-gray);
-        }
-
-        .contact-box {
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .social-link {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-card);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            min-width: 44px;
-            min-height: 44px;
-        }
-
-        @media (max-width: 480px) {
-            .social-link {
-                width: 50px;
-                height: 50px;
-            }
-
-            .social-link i {
-                font-size: 1.2rem;
-            }
-        }
-
-        .social-link:hover {
-            transform: translateY(-5px);
-            background: var(--accent);
-        }
-
-        .social-link i {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
-        .social-link:hover i {
-            color: white;
-        }
-
-        .contact-info p {
-            color: var(--text-gray);
-            margin: 0.5rem 0;
-        }
-
-        footer {
-            background: var(--bg-card);
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-gray);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 2rem 1rem;
-                gap: 1.5rem;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-
-            body.light-mode .nav-links {
-                background: rgba(245, 247, 250, 0.98);
-            }
-
-            .nav-links.active {
-                transform: translateX(0);
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 0.75rem;
-                font-size: 1.1rem;
-            }
-
-            .hero {
-                padding: 6rem 1.5rem 3rem;
-                min-height: calc(100vh - 70px);
-            }
-
-            .hero h1 {
-                font-size: clamp(2rem, 8vw, 3rem);
-            }
-
-            .hero h2 {
-                font-size: clamp(1.2rem, 5vw, 1.5rem);
-            }
-
-            .cta-btns {
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-
-            .btn {
-                width: 100%;
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .skills-grid,
-            .cert-grid,
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .award-box {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
-            }
-
-            .award-icon {
-                font-size: 2.5rem;
-            }
-
-            .exp-card,
-            .edu-card {
-                padding: 1.5rem;
-            }
-
-            .cert-card {
-                padding: 1.25rem;
-            }
-
-            .close-modal {
-                top: 10px;
-                right: 20px;
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
-            }
-
-            .modal-content {
-                max-width: 95%;
-                max-height: 85vh;
-            }
-
-            .modal-caption {
-                bottom: 15px;
-                font-size: 0.95rem;
-                padding: 8px 16px;
-            }
-
-            .section-title {
-                font-size: clamp(1.75rem, 6vw, 2.5rem);
-                margin-bottom: 2rem;
-            }
-
-            .contact-info p {
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav {
-                padding: 0.75rem 1rem;
-            }
-
-            .logo-img {
-                height: 50px;
-            }
-
-            .hero {
-                padding: 4rem 1rem 2rem;
-            }
-
-            .container {
-                padding: 2rem 1rem;
-            }
-
-            section {
-                margin-bottom: 2.5rem;
-            }
-
-            .about-box,
-            .project-card,
-            .exp-card,
-            .edu-card {
-                padding: 1.25rem;
-            }
-
-            .skill-card {
-                padding: 1.25rem;
-            }
-
-            .skill-card h3 {
-                font-size: 1.1rem;
-            }
-
-            .skill-tag,
-            .tech-tag {
-                font-size: 0.85rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .gallery-img {
-                height: 200px;
-            }
-
-            .social-links {
-                gap: 1rem;
-                margin: 1.5rem 0;
-            }
-
-            .contact-box p {
-                font-size: 1rem;
-            }
-
-            .demo-description {
-                padding: 1rem;
-            }
-
-            .demo-description h4 {
-                font-size: 1.1rem;
-            }
-
-            .demo-description p {
-                font-size: 0.95rem;
-            }
-
-            .demo-btn {
-                padding: 0.75rem 1.25rem;
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-
-            .hero h2 {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .profile-img-container {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
-        /* Scroll Animation Styles */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-up.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.8s ease-out;
-        }
-
-        .fade-in.animate {
-            opacity: 1;
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .slide-in-left.animate {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .slide-in-right.animate {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .scale-in.animate {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Stagger animation delays for grid items */
-        .fade-in-up.delay-1 {
-            transition-delay: 0.1s;
-        }
-
-        .fade-in-up.delay-2 {
-            transition-delay: 0.2s;
-        }
-
-        .fade-in-up.delay-3 {
-            transition-delay: 0.3s;
-        }
-
-        .fade-in-up.delay-4 {
-            transition-delay: 0.4s;
-        }
-
-        /* Prevent animation on page load for hero */
-        .hero * {
-            animation: none !important;
-        }
-
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s;
-            z-index: 99;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .back-to-top.visible {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Game Mode Styles */
-        .game-mode-toggle {
-            position: fixed;
-            top: 110px;
-            right: 20px;
-            z-index: 200;
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
-            transition: all 0.3s;
-        }
-
-        .game-mode-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
-        }
-
-
-        .game-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            z-index: 150;
-            overflow: hidden;
-        }
-
-        .game-container.active {
-            display: block;
-        }
-
-        .game-road {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(90deg,
-                    #2a2a3e 0px,
-                    #2a2a3e 50px,
-                    #1a1a2e 50px,
-                    #1a1a2e 100px);
-            background-size: 200px 100%;
-        }
-
-        .road-lines {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg,
-                    transparent 0px,
-                    transparent 98px,
-                    #ffd700 98px,
-                    #ffd700 102px,
-                    transparent 102px,
-                    transparent 200px);
-        }
-
-        .car {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background-image: url('car.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            transform-origin: center;
-            transition: transform 0.1s linear;
-            z-index: 10;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-
-        .checkpoint {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.6));
-            border: 3px solid var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-align: center;
-            cursor: pointer;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
-            z-index: 5;
-        }
-
-        .checkpoint:hover {
-            transform: scale(1.1);
-        }
-
-        .checkpoint.reached {
-            background: radial-gradient(circle, rgba(34, 197, 94, 0.8), rgba(22, 163, 74, 0.6));
-            border-color: #22c55e;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.8);
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .game-info {
-            position: absolute;
-            top: 100px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 1rem;
-            border-radius: 10px;
-            color: white;
-            z-index: 20;
-            backdrop-filter: blur(10px);
-            opacity: 1;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .game-info.minimized {
-            opacity: 0;
-            transform: translateY(-20px);
-            pointer-events: none;
-        }
-
-        .game-info h3 {
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-
-        .game-info p {
-            font-size: 0.9rem;
-            margin: 0.25rem 0;
-        }
-
-        .portfolio-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            z-index: 300;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            display: none;
-            animation: popupIn 0.3s ease-out;
-        }
-
-        .portfolio-popup.active {
-            display: block;
-        }
-
-        @keyframes popupIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 2rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .popup-close:hover {
-            color: var(--accent);
-        }
-
-        .game-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            z-index: 20;
-            opacity: 1;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .game-controls.minimized {
-            opacity: 0;
-            transform: translateX(-50%) translateY(20px);
-            pointer-events: none;
-        }
-
-        .controls-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .control-btn {
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--accent);
-            border-radius: 10px;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .control-btn:active {
-            background: var(--accent);
-            transform: scale(0.95);
-        }
-
-        /* Joystick Styles */
-        .joystick-container {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            width: 120px;
-            height: 120px;
-            display: none;
-            z-index: 20;
-        }
-
-        .joystick-base {
-            width: 120px;
-            height: 120px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 3px solid var(--accent);
-            border-radius: 50%;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .joystick-stick {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            cursor: grab;
-        }
-
-        .joystick-stick:active {
-            cursor: grabbing;
-        }
-
-        .joystick-stick.active {
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .joystick-container {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .game-mode-toggle {
-                top: 100px;
-                right: 10px;
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .game-info {
-                top: 80px;
-                left: 10px;
-                padding: 0.75rem;
-                font-size: 0.85rem;
-            }
-
-            .car {
-                width: 60px;
-                height: 60px;
-            }
-
-            .checkpoint {
-                width: 60px;
-                height: 60px;
-                font-size: 0.75rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Glenn Adorio | Computer Engineering Graduate &amp; IT Professional</title>
+  <meta name="description"
+    content="Portfolio of Glenn Wenand Arsemel Adorio, a Computer Engineering graduate from Cavite, Philippines with hands-on experience in IT support, networking, troubleshooting, and software development.">
+  <meta name="author" content="Glenn Wenand Arsemel Adorio">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.gwada.site/">
+  <meta property="og:title" content="Glenn Adorio | Computer Engineering Graduate &amp; IT Professional">
+  <meta property="og:description"
+    content="Computer Engineering graduate with hands-on experience in IT support, networking, system troubleshooting, and software development.">
+  <meta property="og:image" content="https://www.gwada.site/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Glenn Adorio | Computer Engineering Graduate &amp; IT Professional">
+  <meta name="twitter:description"
+    content="Explore engineering, software development, and IT support projects by Glenn Wenand Arsemel Adorio.">
+
+  <link rel="canonical" href="https://www.gwada.site/">
+  <link rel="icon" href="logo.png" type="image/png">
+
+  <!-- Typography: Host Grotesk + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Prevent flash of wrong theme before paint -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark-mode');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 
 <body>
-    <button class="game-mode-toggle" onclick="toggleGameMode()" id="gameToggle">
-        <i class="fas fa-gamepad"></i> Game Mode
-    </button>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- Game Container -->
-    <div class="game-container" id="gameContainer">
-        <button class="game-mode-toggle" onclick="toggleGameMode()"
-            style="position: absolute; top: 20px; right: 20px; z-index: 200;">
-            <i class="fas fa-times"></i> Exit Game
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="wrap nav-inner">
+      <a href="#home" class="brand" aria-label="Glenn Adorio Home">
+        <img src="logo.png" alt="Glenn Adorio logo" class="brand-logo">
+        <span>Glenn Adorio</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link is-active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#awards" class="nav-link">Awards</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="icon-btn" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+          <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
         </button>
-
-        <div class="game-road"></div>
-        <div class="road-lines"></div>
-
-        <div class="game-info" id="gameInfo">
-            <h3><i class="fas fa-info-circle"></i> Game Controls</h3>
-            <p id="controlInstructions">WASD or Arrow Keys to move</p>
-            <p>Drive to checkpoints to explore!</p>
-        </div>
-
-        <div class="car" id="car"></div>
-
-        <!-- Checkpoints -->
-        <div class="checkpoint" id="checkpoint-about" style="top: 20%; left: 10%;"
-            onclick="showPortfolioSection('about')">
-            About
-        </div>
-        <div class="checkpoint" id="checkpoint-skills" style="top: 40%; left: 30%;"
-            onclick="showPortfolioSection('skills')">
-            Skills
-        </div>
-        <div class="checkpoint" id="checkpoint-projects" style="top: 60%; left: 50%;"
-            onclick="showPortfolioSection('projects')">
-            Projects
-        </div>
-        <div class="checkpoint" id="checkpoint-awards" style="top: 30%; left: 70%;"
-            onclick="showPortfolioSection('awards')">
-            Awards
-        </div>
-        <div class="checkpoint" id="checkpoint-contact" style="top: 70%; left: 85%;"
-            onclick="showPortfolioSection('contact')">
-            Contact
-        </div>
-
-        <!-- Mobile Controls - Arrow Buttons (Hidden on desktop) -->
-        <div class="game-controls" id="gameControls">
-            <div class="controls-row">
-                <button class="control-btn" onmousedown="startMove('up')" onmouseup="stopMove()"
-                    ontouchstart="startMove('up')" ontouchend="stopMove()">↑</button>
-            </div>
-            <div class="controls-row">
-                <button class="control-btn" onmousedown="startMove('left')" onmouseup="stopMove()"
-                    ontouchstart="startMove('left')" ontouchend="stopMove()">←</button>
-                <button class="control-btn" onmousedown="startMove('down')" onmouseup="stopMove()"
-                    ontouchstart="startMove('down')" ontouchend="stopMove()">↓</button>
-                <button class="control-btn" onmousedown="startMove('right')" onmouseup="stopMove()"
-                    ontouchstart="startMove('right')" ontouchend="stopMove()">→</button>
-            </div>
-        </div>
-
-        <!-- Mobile Joystick -->
-        <div class="joystick-container" id="joystickContainer">
-            <div class="joystick-base">
-                <div class="joystick-stick" id="joystickStick"></div>
-            </div>
-        </div>
+        <button type="button" class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle navigation menu"
+          aria-expanded="false" aria-controls="navLinks">
+          <i class="fas fa-bars" id="menuIcon" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <!-- Portfolio Popup -->
-    <div class="portfolio-popup" id="portfolioPopup">
-        <button class="popup-close" onclick="closePortfolioPopup()">&times;</button>
-        <div id="popupContent"></div>
-    </div>
-
-    <nav>
-        <div class="nav-content">
-            <div class="logo">
-                <img src="logo.png" alt="Logo" class="logo-img">
-            </div>
-            <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-                <i class="fas fa-bars" id="menuIcon"></i>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
-                <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
-                <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
-                <li><a href="#gallery" onclick="closeMobileMenu()">Gallery</a></li>
-                <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
-                <li><button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i
-                            class="fas fa-moon"></i></button></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section class="hero">
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
         <div>
-            <div class="profile-img-container">
-                <img src="profile.jpg" alt="Glenn Adorio" class="profile-img profile-img-main"
-                    onerror="this.style.display='none'">
-                <img src="profile-hover.jpg" alt="Glenn Adorio Alternative" class="profile-img profile-img-hover"
-                    onerror="this.style.display='none'">
-            </div>
-            <h1>Glenn Wenand Arsemel Adorio</h1>
-            <h2>Computer Engineering Graduate</h2>
-            <p>📍 General Mariano Alvarez, Cavite</p>
-            <div class="cta-btns">
-                <a href="mailto:glennkoy0409@gmail.com" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-secondary">View Projects</a>
-            </div>
+          <div class="hero-eyebrow" data-hero-item>
+            <i class="fas fa-microchip" aria-hidden="true"></i>
+            <span>Computer Engineering Graduate</span>
+          </div>
+
+          <h1 id="hero-title" class="hero-title" data-hero-item>
+            Glenn Wenand Arsemel Adorio
+          </h1>
+
+          <p class="hero-role" data-hero-item>
+            IT Support, Networking &amp; Software Development
+          </p>
+
+          <p class="hero-intro" data-hero-item>
+            Computer Engineering graduate with hands-on experience in IT support, networking, troubleshooting, and
+            software development.
+          </p>
+
+          <div class="hero-meta" data-hero-item>
+            <span class="hero-meta-item">
+              <i class="fas fa-location-dot" aria-hidden="true"></i>
+              General Mariano Alvarez, Cavite, Philippines
+            </span>
+            <span class="hero-meta-item">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              glennkoy0409@gmail.com
+            </span>
+          </div>
+
+          <div class="btn-row" data-hero-item>
+            <a href="#projects" class="btn btn--primary">
+              <span>View My Projects</span>
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a href="#contact" class="btn btn--secondary">
+              <span>Contact Me</span>
+            </a>
+          </div>
+
+          <div class="hero-social" data-hero-item>
+            <a href="https://github.com/gwada0409" target="_blank" rel="noopener noreferrer" class="social-pill">
+              <i class="fab fa-github" aria-hidden="true"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" rel="noopener noreferrer"
+              class="social-pill">
+              <i class="fab fa-linkedin" aria-hidden="true"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:glennkoy0409@gmail.com" class="social-pill">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              <span>Email</span>
+            </a>
+          </div>
         </div>
+
+        <div class="hero-profile" data-hero-media>
+          <div class="profile-frame" tabindex="0" aria-label="Portrait of Glenn Wenand Arsemel Adorio">
+            <img src="profile.jpg" alt="Glenn Wenand Arsemel Adorio" class="profile-img profile-img--main">
+            <img src="profile-hover.jpg" alt="Glenn Wenand Arsemel Adorio alternate portrait"
+              class="profile-img profile-img--hover">
+            <div class="profile-caption">
+              <span><span class="status-dot" aria-hidden="true"></span>Open to IT &amp; Dev Roles</span>
+              <span>gwada0409</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <div class="container">
-        <section id="about">
-            <h2 class="section-title fade-in-up">About Me</h2>
-            <div class="about-box fade-in-up delay-1">
-                <p>Computer Engineering graduate with hands-on experience in IT support, networking, and software
-                    development. Skilled in troubleshooting, system configuration, and backend programming fundamentals.
-                    Seeking an entry-level IT or software role to apply technical and problem-solving skills.</p>
+    <!-- About Section -->
+    <section id="about" class="section section--alt" aria-labelledby="about-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="section-header" data-reveal-item>
+          <span class="section-kicker">01 / About</span>
+          <h2 id="about-heading" class="section-title">Practical engineering across hardware, networks, and software.</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-prose" data-reveal-item>
+            <p>
+              Computer Engineering graduate with hands-on experience in IT support, networking, system troubleshooting,
+              and software development.
+            </p>
+            <p>
+              Experienced in hardware and software troubleshooting, network configuration, system administration
+              fundamentals, and technical support.
+            </p>
+            <p>
+              Interested in software development, automation, networking, and building practical technology solutions.
+              Seeking opportunities to apply technical and problem-solving skills in IT or software development roles.
+            </p>
+          </div>
+
+          <div class="about-facts">
+            <div class="fact-item" data-reveal-item>
+              <span class="fact-label">Degree</span>
+              <span class="fact-value">B.S. Computer Engineering (LPU–Cavite, 2019–2025)</span>
             </div>
-        </section>
-
-        <section id="skills">
-            <h2 class="section-title fade-in-up">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card fade-in-up delay-1">
-                    <h3><i class="fas fa-code"></i> Frontend</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
-                    </div>
-                </div>
-                <div class="skill-card fade-in-up delay-2">
-                    <h3><i class="fas fa-code"></i> Backend</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">SQL</span>
-                    </div>
-                </div>
-                <div class="skill-card fade-in-up delay-3">
-                    <h3><i class="fas fa-brain"></i> Artificial Intelligence & LLMs</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Large Language Models</span>
-                        <span class="skill-tag">Prompt Engineering</span>
-                        <span class="skill-tag">AI Model Evaluation (Basic)</span>
-                        <span class="skill-tag">LLM APIs (Basic)</span>
-                    </div>
-                </div>
-                <div class="skill-card fade-in-up delay-4">
-                    <h3><i class="fas fa-shield-alt"></i> Networking & Security</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">TCP/IP</span>
-                        <span class="skill-tag">DNS</span>
-                        <span class="skill-tag">VPNs</span>
-                        <span class="skill-tag">Firewalls</span>
-                        <span class="skill-tag">Penetration Testing</span>
-                    </div>
-                </div>
-                <div class="skill-card fade-in-up delay-5">
-                    <h3><i class="fas fa-server"></i> Operating Systems</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Linux (Ubuntu, Debian)</span>
-                        <span class="skill-tag">Windows Server</span>
-                        <span class="skill-tag">Virtualization</span>
-                    </div>
-                </div>
-                <div class="skill-card fade-in-up delay-6">
-                    <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Microsoft Office</span>
-                        <span class="skill-tag">Arduino</span>
-                        <span class="skill-tag">Git</span>
-                    </div>
-                </div>
+            <div class="fact-item" data-reveal-item>
+              <span class="fact-label">Location</span>
+              <span class="fact-value">General Mariano Alvarez, Cavite, Philippines</span>
             </div>
-        </section>
-
-        <section id="projects">
-            <h2 class="section-title fade-in-up">Featured Project</h2>
-            <div class="project-card fade-in-up delay-1">
-                <h3>Syringe Needle Collector Machine</h3>
-                <p>Award-winning automation solution using Arduino micro-controller to improve medical waste collection
-                    efficiency and safety. Recognized as Most Outstanding Research in Computer Engineering.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Arduino IDE</span>
-                    <span class="tech-tag">C++</span>
-                    <span class="tech-tag">Embedded Systems</span>
-                    <span class="tech-tag">Automation</span>
-                </div>
-
-                <!-- Project Demo Section -->
-                <div class="demo-container fade-in delay-2">
-                    <h4 style="color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-video"></i> Project Demo
-                    </h4>
-                    <video class="demo-video" controls style="display: block;">
-                        <source
-                            src="https://res.cloudinary.com/dnmwzxsuf/video/upload/v1769328963/compressedProject-Demo_b61ums.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="demo-description">
-                        <h4>How It Works</h4>
-                        <p>The Syringe Needle Collector Machine utilizes Arduino microcontroller technology to automate
-                            the safe collection and disposal of medical waste. The system features sensor-based
-                            detection, automated sorting mechanisms, and safety protocols to minimize human contact with
-                            hazardous materials.</p>
-                    </div>
-                </div>
-
-                <!-- Project Gallery Section (Integrated) -->
-                <div id="gallery" style="margin-top: 3rem;">
-                    <h4 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;"
-                        class="fade-in-up delay-1"><i class="fas fa-images"></i> Project Gallery</h4>
-                    <div class="gallery-grid">
-                        <div class="gallery-item fade-in-up delay-1" onclick="openModal(this)">
-                            <div class="gallery-img">
-                                <img src="3d-model.jpg" alt="3D Model"
-                                    style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                            <div class="gallery-caption">3D Model Design</div>
-                        </div>
-                        <div class="gallery-item fade-in-up delay-2" onclick="openModal(this)">
-                            <div class="gallery-img">
-                                <img src="actual-model.jpg" alt="Actual Model"
-                                    style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                            <div class="gallery-caption">Actual Physical Model</div>
-                        </div>
-                        <div class="gallery-item fade-in-up delay-3" onclick="openModal(this)">
-                            <div class="gallery-img">
-                                <img src="specification.jpg" alt="Specifications"
-                                    style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                            <div class="gallery-caption">Technical Specifications</div>
-                        </div>
-                    </div>
-                    <p style="text-align: center; color: var(--text-gray); margin-top: 1.5rem; font-size: 0.95rem;"
-                        class="fade-in delay-4">
-                        <i class="fas fa-info-circle"></i> Click on any image to view in full screen
-                    </p>
-                </div>
+            <div class="fact-item" data-reveal-item>
+              <span class="fact-label">Focus Areas</span>
+              <span class="fact-value">IT Support, Networking, Web Apps &amp; Embedded Automation</span>
             </div>
-        </section>
-
-        <section id="awards">
-            <h2 class="section-title fade-in-up">Awards & Recognition</h2>
-            <div class="award-box fade-in-up delay-1">
-                <i class="fas fa-trophy award-icon"></i>
-                <div>
-                    <h3>Most Outstanding Research in Computer Engineering</h3>
-                    <p>Syringe Needle Collector Machine Using Arduino Micro-Controller</p>
-                    <p><small>10th LPU-Cavite College of Engineering Research Colloquium</small></p>
-                </div>
+            <div class="fact-item" data-reveal-item>
+              <span class="fact-label">Portfolio Domain</span>
+              <span class="fact-value">www.gwada.site</span>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="experience">
-            <h2 class="section-title fade-in-up">Work Experience</h2>
-            <div class="exp-card fade-in-up delay-1">
-                <div class="exp-header">
-                    <h3>IT Technical Support</h3>
-                    <p class="company">Freelance</p>
-                    <p class="duration">2023 - Present</p>
-                </div>
-                <ul>
-                    <li>Troubleshoot and resolve hardware, software, and system issues efficiently</li>
-                    <li>Install, configure, and optimize operating systems and essential applications</li>
-                    <li>Set up and maintain stable network connections (Wi-Fi, LAN, routers)</li>
-                    <li>Deliver remote technical support using UltraViewer and AnyDesk</li>
-                    <li>Diagnose and repair computer hardware, including upgrades and replacements</li>
-                    <li>Perform system maintenance, updates, and malware/virus removal</li>
-                    <li>Provide clear, user-friendly technical assistance to clients</li>
+    <!-- Technical Skills Section -->
+    <section id="skills" class="section" aria-labelledby="skills-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="section-header" data-reveal-item>
+          <span class="section-kicker">02 / Technical Skills</span>
+          <h2 id="skills-heading" class="section-title">Core technologies and operational fundamentals.</h2>
+          <p class="section-lead">Tools and systems applied across academic engineering research, IT support work, and
+            full-stack web projects.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card" data-reveal-item>
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true"><i class="fas fa-laptop-code"></i></span>
+              <h3>Frontend</h3>
+            </div>
+            <div class="tag-list">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </article>
+
+          <article class="skill-card" data-reveal-item>
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true"><i class="fas fa-terminal"></i></span>
+              <h3>Programming &amp; Backend</h3>
+            </div>
+            <div class="tag-list">
+              <span class="tag">C++</span>
+              <span class="tag">Java</span>
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+            </div>
+          </article>
+
+          <article class="skill-card" data-reveal-item>
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true"><i class="fas fa-brain"></i></span>
+              <h3>Artificial Intelligence</h3>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Large Language Models</span>
+              <span class="tag">Prompt Engineering</span>
+              <span class="tag">Basic AI Model Evaluation</span>
+              <span class="tag">Basic LLM API Integration</span>
+            </div>
+          </article>
+
+          <article class="skill-card" data-reveal-item>
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></span>
+              <h3>Networking &amp; Security</h3>
+            </div>
+            <div class="tag-list">
+              <span class="tag">TCP/IP</span>
+              <span class="tag">DNS</span>
+              <span class="tag">VPNs</span>
+              <span class="tag">Firewalls</span>
+              <span class="tag">Basic Penetration Testing</span>
+            </div>
+          </article>
+
+          <article class="skill-card" data-reveal-item>
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true"><i class="fas fa-server"></i></span>
+              <h3>Operating Systems</h3>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Linux</span>
+              <span class="tag">Ubuntu</span>
+              <span class="tag">Debian</span>
+              <span class="tag">Windows Server</span>
+              <span class="tag">Virtualization</span>
+            </div>
+          </article>
+
+          <article class="skill-card" data-reveal-item>
+            <div class="skill-card-head">
+              <span class="skill-icon" aria-hidden="true"><i class="fas fa-wrench"></i></span>
+              <h3>Tools &amp; Technologies</h3>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Git</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Arduino</span>
+              <span class="tag">Microsoft Office</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section section--alt" aria-labelledby="projects-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="section-header" data-reveal-item>
+          <span class="section-kicker">03 / Projects</span>
+          <h2 id="projects-heading" class="section-title">Featured engineering work and software repositories.</h2>
+          <p class="section-lead">Award-winning embedded hardware research alongside full-stack and offline-first web
+            applications from GitHub.</p>
+        </div>
+
+        <!-- Featured Project: Syringe Needle Collector Machine -->
+        <article class="featured-card" data-reveal-item>
+          <div class="featured-top">
+            <div>
+              <span class="featured-badge">
+                <i class="fas fa-trophy" aria-hidden="true"></i>
+                Most Outstanding Research in Computer Engineering
+              </span>
+              <h3 class="featured-title">Syringe Needle Collector Machine Using Arduino Micro-Controller</h3>
+              <p class="featured-summary">
+                An automation solution designed to improve medical waste collection efficiency and safety using
+                sensor-based detection and automated sorting mechanisms.
+              </p>
+            </div>
+            <div class="tag-list">
+              <span class="tag">Arduino IDE</span>
+              <span class="tag">C++</span>
+              <span class="tag">Embedded Systems</span>
+              <span class="tag">Automation</span>
+            </div>
+          </div>
+
+          <div class="featured-body">
+            <div class="video-wrapper">
+              <video class="demo-video" controls preload="metadata" poster="video-poster.jpg">
+                <source
+                  src="https://res.cloudinary.com/dnmwzxsuf/video/upload/v1769328963/compressedProject-Demo_b61ums.mp4"
+                  type="video/mp4">
+                Your browser does not support the HTML5 video tag.
+              </video>
+              <div class="video-caption">
+                <i class="fas fa-play-circle" aria-hidden="true"></i>
+                <span>Hardware prototype demonstration video</span>
+              </div>
+            </div>
+
+            <div class="featured-details">
+              <div class="detail-block">
+                <h4>Project Objectives</h4>
+                <p>
+                  Reduce direct human contact with used syringe needles during medical waste handling and standardize
+                  safe, automated collection at the point of disposal.
+                </p>
+              </div>
+
+              <div class="detail-block">
+                <h4>Technical Implementation</h4>
+                <ul class="detail-list">
+                  <li>Arduino microcontroller logic written in C++ for actuator and sensor coordination</li>
+                  <li>Sensor-based detection to trigger controlled collection cycles</li>
+                  <li>Automated sorting and containment mechanisms to isolate hazardous sharps</li>
+                  <li>Safety-focused physical enclosure designed for reliable operation</li>
                 </ul>
-            </div>
-            <div class="exp-card fade-in-up delay-2">
-                <div class="exp-header">
-                    <h3>Intern / IT Personnel</h3>
-                    <p class="company">Technomotion Controls International</p>
-                    <p class="duration">July 13 - August 23, 2023</p>
-                </div>
-                <ul>
-                    <li>Gained practical experience in IT infrastructure and system administration</li>
-                    <li>Assisted with network configuration and troubleshooting</li>
-                    <li>Applied cybersecurity principles in real-world enterprise environment</li>
-                    <li>Supported technical operations and system maintenance</li>
-                </ul>
-            </div>
-        </section>
+              </div>
 
-        <section id="education">
-            <h2 class="section-title fade-in-up">Education</h2>
-            <div class="edu-card fade-in-up delay-1">
-                <h3>Bachelor of Science in Computer Engineering</h3>
-                <p class="school">Lyceum of the Philippines University - Cavite</p>
-                <p class="year">2019 - 2025</p>
+              <div class="detail-block">
+                <h4>Recognition</h4>
+                <p>
+                  Awarded <strong>Most Outstanding Research in Computer Engineering</strong> at the 10th LPU-Cavite
+                  College of Engineering Research Colloquium.
+                </p>
+              </div>
             </div>
-            <div class="edu-card fade-in-up delay-2">
-                <h3>Science, Technology, Engineering and Mathematics (STEM)</h3>
-                <p class="school">Holy Family Academy of GMA Cavite</p>
-                <p class="year">2017 - 2019</p>
-            </div>
-        </section>
+          </div>
 
-        <section id="certifications">
-            <h2 class="section-title fade-in-up">Certifications & Training</h2>
-            <div class="cert-grid">
-                <div class="cert-card fade-in-up delay-1">
-                    <i class="fas fa-award"></i>
-                    <p>Cyber Security Awareness Seminar - LPU Cavite</p>
-                </div>
-                <div class="cert-card fade-in-up delay-2">
-                    <i class="fas fa-award"></i>
-                    <p>GIS & Geospatial Analysis with Python, Geopandas, Folium - Udemy</p>
-                </div>
+          <div class="gallery-section">
+            <div class="gallery-header">
+              <h4>Project Gallery</h4>
+              <span class="gallery-hint">Select an image to inspect full screen (supports keyboard navigation)</span>
             </div>
-        </section>
+            <div class="gallery-grid">
+              <button type="button" class="gallery-item" data-caption="3D Model Design — Syringe Needle Collector">
+                <div class="gallery-thumb">
+                  <img src="3d-model.jpg" alt="3D CAD model design of the Syringe Needle Collector Machine"
+                    loading="lazy">
+                </div>
+                <div class="gallery-caption">
+                  <span>3D Model Design</span>
+                  <i class="fas fa-expand" aria-hidden="true"></i>
+                </div>
+              </button>
 
-        <section id="contact">
-            <h2 class="section-title fade-in-up">Let's Connect</h2>
-            <div class="contact-box">
-                <p style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem;" class="fade-in-up delay-1">
-                    I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
-                <div class="social-links fade-in-up delay-2">
-                    <a href="mailto:glennkoy0409@gmail.com" class="social-link scale-in"><i
-                            class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/gwada0409" target="_blank" class="social-link scale-in delay-1"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/gwada0409/" target="_blank"
-                        class="social-link scale-in delay-2"><i class="fab fa-linkedin"></i></a>
+              <button type="button" class="gallery-item" data-caption="Actual Physical Model — Prototype Build">
+                <div class="gallery-thumb">
+                  <img src="actual-model.jpg" alt="Actual physical prototype of the Syringe Needle Collector Machine"
+                    loading="lazy">
                 </div>
-                <div class="contact-info fade-in delay-3">
-                    <p><i class="fas fa-envelope"></i> glennkoy0409@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +63 906 199 5229</p>
+                <div class="gallery-caption">
+                  <span>Actual Physical Model</span>
+                  <i class="fas fa-expand" aria-hidden="true"></i>
                 </div>
+              </button>
+
+              <button type="button" class="gallery-item" data-caption="Technical Specifications — Hardware Overview">
+                <div class="gallery-thumb">
+                  <img src="specification.jpg" alt="Technical specifications sheet for the Syringe Needle Collector"
+                    loading="lazy">
+                </div>
+                <div class="gallery-caption">
+                  <span>Technical Specifications</span>
+                  <i class="fas fa-expand" aria-hidden="true"></i>
+                </div>
+              </button>
             </div>
-        </section>
+          </div>
+        </article>
+
+        <!-- GitHub Software Projects -->
+        <h3 class="projects-subheading" data-reveal-item>Software &amp; Web Applications</h3>
+        <div class="projects-grid">
+          <article class="project-card" data-reveal-item>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">FinTech / AI Web App</span>
+              </div>
+              <h4 class="project-title">PayWise</h4>
+              <p class="project-desc">
+                Mobile-first personal finance and payday tracker built for semi-monthly salary schedules in the
+                Philippines, computing true spendable cash and 50/30/20 budgets.
+              </p>
+              <ul class="project-features">
+                <li>Semi-monthly payday countdown &amp; spendable cash calculations</li>
+                <li>50/30/20 budget tracking, bills calendar, savings goals &amp; loans</li>
+                <li>Google Gemini AI assistant with privacy-scoped financial context</li>
+                <li>Interactive Recharts analytics with CSV and PDF report exports</li>
+              </ul>
+            </div>
+            <div class="project-footer">
+              <div class="tag-list">
+                <span class="tag">Next.js 14</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Supabase</span>
+                <span class="tag">Gemini API</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/gwada0409/paywise" target="_blank" rel="noopener noreferrer"
+                  class="text-link">
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <span>Source Code</span>
+                </a>
+                <a href="https://paywise-seven.vercel.app" target="_blank" rel="noopener noreferrer" class="text-link">
+                  <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                  <span>Live Demo</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal-item>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Offline-First POS PWA</span>
+              </div>
+              <h4 class="project-title">Tindahan Manager</h4>
+              <p class="project-desc">
+                Offline-first Point-of-Sale (POS) and inventory management Progressive Web App tailored for retail stores
+                with durable local storage and cloud sync.
+              </p>
+              <ul class="project-features">
+                <li>Cash &amp; utang checkout, barcode scanning, and FEFO/FIFO stock tracking</li>
+                <li>IndexedDB persistence via Dexie.js with durable sync queue</li>
+                <li>Optional Supabase Auth, RLS schemas &amp; multi-device sync</li>
+                <li>SHA-256 JSON backup/restore and 7-day sales reporting</li>
+              </ul>
+            </div>
+            <div class="project-footer">
+              <div class="tag-list">
+                <span class="tag">React 19</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Dexie.js</span>
+                <span class="tag">Tailwind CSS</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/gwada0409/tindahan-manager" target="_blank" rel="noopener noreferrer"
+                  class="text-link">
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <span>Source Code</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal-item>
+            <div>
+              <div class="project-meta">
+                <span class="project-category">Enterprise Workflow System</span>
+              </div>
+              <h4 class="project-title">OnlineFS</h4>
+              <p class="project-desc">
+                Leave-filing and multi-tier approval web application split between a React/TypeScript PWA frontend and
+                an ASP.NET Core / SQLite backend.
+              </p>
+              <ul class="project-features">
+                <li>Employee leave filing, policy validation &amp; printable summaries</li>
+                <li>Department/category approval routing and delegation workflows</li>
+                <li>HR finalization, balance management &amp; CSV reporting</li>
+                <li>Real-time notifications via SignalR and Dockerized deployment setup</li>
+              </ul>
+            </div>
+            <div class="project-footer">
+              <div class="tag-list">
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">ASP.NET Core</span>
+                <span class="tag">Docker</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/gwada0409/OnlineFS" target="_blank" rel="noopener noreferrer"
+                  class="text-link">
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <span>Source Code</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section" aria-labelledby="experience-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="section-header" data-reveal-item>
+          <span class="section-kicker">04 / Experience</span>
+          <h2 id="experience-heading" class="section-title">Hands-on IT support and infrastructure experience.</h2>
+        </div>
+
+        <div class="timeline" data-timeline>
+          <div class="timeline-rail" aria-hidden="true"></div>
+
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">IT Technical Support</h3>
+                <p class="exp-company">Freelance</p>
+              </div>
+              <span class="exp-duration">2023 – Present</span>
+            </div>
+            <ul class="exp-list">
+              <li>Hardware and software troubleshooting</li>
+              <li>Operating system installation and configuration</li>
+              <li>Network setup and maintenance</li>
+              <li>Wi-Fi and LAN troubleshooting</li>
+              <li>Router configuration</li>
+              <li>Hardware diagnostics and upgrades</li>
+              <li>Remote technical support using UltraViewer and AnyDesk</li>
+              <li>Basic malware and virus troubleshooting</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Intern / IT Personnel</h3>
+                <p class="exp-company">Technomotion Controls International</p>
+              </div>
+              <span class="exp-duration">July 13 – August 23, 2023</span>
+            </div>
+            <ul class="exp-list">
+              <li>IT infrastructure support</li>
+              <li>Hardware and software troubleshooting</li>
+              <li>Computer setup and maintenance</li>
+              <li>Network configuration</li>
+              <li>Printer troubleshooting</li>
+              <li>Technical documentation</li>
+              <li>System administration fundamentals</li>
+              <li>Technical operations support</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section section--alt" aria-labelledby="education-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="section-header" data-reveal-item>
+          <span class="section-kicker">05 / Education</span>
+          <h2 id="education-heading" class="section-title">Academic background.</h2>
+        </div>
+
+        <div class="two-col-grid">
+          <article class="info-card" data-reveal-item>
+            <span class="info-card-year">2019 – 2025</span>
+            <h3>Bachelor of Science in Computer Engineering</h3>
+            <p>Lyceum of the Philippines University – Cavite</p>
+          </article>
+
+          <article class="info-card" data-reveal-item>
+            <span class="info-card-year">2017 – 2019</span>
+            <h3>Science, Technology, Engineering and Mathematics (STEM)</h3>
+            <p>Holy Family Academy of GMA Cavite</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Awards & Certifications Section -->
+    <section id="awards" class="section" aria-labelledby="awards-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="section-header" data-reveal-item>
+          <span class="section-kicker">06 / Awards &amp; Certifications</span>
+          <h2 id="awards-heading" class="section-title">Recognition and technical training.</h2>
+        </div>
+
+        <div class="awards-layout">
+          <article class="award-card" data-reveal-item>
+            <div class="award-icon" aria-hidden="true">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div>
+              <h3>Most Outstanding Research in Computer Engineering</h3>
+              <p>Syringe Needle Collector Machine Using Arduino Micro-Controller</p>
+              <span class="award-event">10th LPU-Cavite College of Engineering Research Colloquium</span>
+            </div>
+          </article>
+
+          <div class="cert-stack">
+            <article class="cert-card" data-reveal-item>
+              <i class="fas fa-certificate" aria-hidden="true"></i>
+              <div>
+                <div class="cert-title">Cyber Security Awareness Seminar</div>
+                <div class="cert-issuer">LPU Cavite</div>
+              </div>
+            </article>
+
+            <article class="cert-card" data-reveal-item>
+              <i class="fas fa-certificate" aria-hidden="true"></i>
+              <div>
+                <div class="cert-title">GIS &amp; Geospatial Analysis with Python, GeoPandas, and Folium</div>
+                <div class="cert-issuer">Udemy</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section--alt" aria-labelledby="contact-heading">
+      <div class="wrap" data-reveal-group>
+        <div class="contact-panel" data-reveal-item>
+          <div>
+            <span class="section-kicker">07 / Contact</span>
+            <h2 id="contact-heading">Let&apos;s connect.</h2>
+            <p>
+              I&apos;m open to entry-level IT support, networking, and software development opportunities. Feel free to
+              reach out directly by email or phone.
+            </p>
+            <div class="btn-row">
+              <a href="mailto:glennkoy0409@gmail.com" class="btn btn--primary">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <span>Send Email</span>
+              </a>
+              <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" rel="noopener noreferrer"
+                class="btn btn--secondary">
+                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                <span>LinkedIn Profile</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-details">
+            <a href="mailto:glennkoy0409@gmail.com" class="contact-row">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <span>glennkoy0409@gmail.com</span>
+            </a>
+            <a href="tel:+639061995229" class="contact-row">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              <span>+63 906 199 5229</span>
+            </a>
+            <a href="https://github.com/gwada0409" target="_blank" rel="noopener noreferrer" class="contact-row">
+              <i class="fab fa-github" aria-hidden="true"></i>
+              <span>github.com/gwada0409</span>
+            </a>
+            <a href="https://www.gwada.site/" target="_blank" rel="noopener noreferrer" class="contact-row">
+              <i class="fas fa-globe" aria-hidden="true"></i>
+              <span>www.gwada.site</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>&copy; 2026 Glenn Wenand Arsemel Adorio. General Mariano Alvarez, Cavite, Philippines.</p>
+      <div class="footer-links">
+        <a href="https://github.com/gwada0409" target="_blank" rel="noopener noreferrer" class="text-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" rel="noopener noreferrer"
+          class="text-link">LinkedIn</a>
+        <a href="#home" class="text-link">Back to top</a>
+      </div>
     </div>
+  </footer>
 
-    <footer>
-        <p>© 2026 Glenn Wenand Arsemel Adorio. Built with HTML & CSS</p>
-    </footer>
+  <!-- Back to Top Button -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage" alt="Full screen image">
-        <div class="modal-caption" id="modalCaption"></div>
+  <!-- Accessible Image Lightbox Modal -->
+  <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalCaption" aria-hidden="true">
+    <div class="modal-dialog">
+      <img class="modal-img" id="modalImage" src="" alt="">
+      <div class="modal-bar">
+        <span id="modalCaption"></span>
+        <div class="modal-controls">
+          <button type="button" class="modal-btn" id="modalPrev" aria-label="Previous image">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="modal-btn" id="modalNext" aria-label="Next image">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="modal-btn" id="modalClose" aria-label="Close modal">
+            <i class="fas fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            const icon = document.querySelector('.theme-btn i');
-            icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
-        }
+  <script type="module" src="js/main.js"></script>
+</body>
 
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuIcon = document.getElementById('menuIcon');
-            navLinks.classList.toggle('active');
-            menuIcon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
-        }
-
-        function closeMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuIcon = document.getElementById('menuIcon');
-            navLinks.classList.remove('active');
-            menuIcon.className = 'fas fa-bars';
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function (event) {
-            const nav = document.querySelector('nav');
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
-
-            if (navLinks.classList.contains('active') &&
-                !nav.contains(event.target) &&
-                event.target !== menuToggle) {
-                closeMobileMenu();
-            }
-        });
-
-        // Close mobile menu on window resize if it's open
-        window.addEventListener('resize', function () {
-            if (window.innerWidth > 768) {
-                closeMobileMenu();
-            }
-        });
-
-        function openModal(element) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            const caption = document.getElementById('modalCaption');
-
-            const img = element.querySelector('img');
-            const captionText = element.querySelector('.gallery-caption').textContent;
-
-            modal.classList.add('active');
-            modalImg.src = img.src;
-            modalImg.alt = img.alt;
-            caption.textContent = captionText;
-
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-
-            // Add fade out animation
-            modalImg.style.animation = 'zoomOut 0.3s ease-out';
-            modal.style.animation = 'fadeOut 0.3s ease-out';
-
-            setTimeout(() => {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                // Reset animations
-                modalImg.style.animation = '';
-                modal.style.animation = '';
-            }, 300);
-        }
-
-        // Close modal when clicking outside the image
-        document.getElementById('imageModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                closePortfolioPopup();
-            }
-        });
-
-        // ========== GAME MODE FUNCTIONS ==========
-        let gameActive = false;
-        let carPosition = { x: 50, y: 50 };
-        let carSpeed = 3;
-        let keys = {};
-        let moveInterval = null;
-        let currentCheckpoint = null;
-        let joystickActive = false;
-        let joystickPosition = { x: 0, y: 0 };
-        let gameInfoTimeout = null;
-
-        function toggleGameMode() {
-            gameActive = !gameActive;
-            const gameContainer = document.getElementById('gameContainer');
-            const gameToggle = document.getElementById('gameToggle');
-
-            if (gameActive) {
-                gameContainer.classList.add('active');
-                gameToggle.style.display = 'none'; // Hide when in game
-                document.body.style.overflow = 'hidden';
-                initializeCar();
-                startGameLoop();
-                initializeJoystick();
-                minimizeGameInfoAfterDelay();
-            } else {
-                gameContainer.classList.remove('active');
-                gameToggle.innerHTML = '<i class="fas fa-gamepad"></i> Game Mode';
-                gameToggle.style.display = 'block'; // Show when not in game
-                document.body.style.overflow = 'auto';
-                stopGameLoop();
-                closePortfolioPopup();
-                resetAllCheckpoints();
-                resetJoystick();
-                if (gameInfoTimeout) {
-                    clearTimeout(gameInfoTimeout);
-                    gameInfoTimeout = null;
-                }
-                const gameInfo = document.getElementById('gameInfo');
-                if (gameInfo) {
-                    gameInfo.classList.remove('minimized');
-                }
-            }
-        }
-
-        function initializeCar() {
-            const car = document.getElementById('car');
-            const gameContainer = document.getElementById('gameContainer');
-            // Start car in center-bottom area
-            carPosition.x = (gameContainer.offsetWidth / 2) - 40;
-            carPosition.y = gameContainer.offsetHeight - 120;
-            car.style.left = carPosition.x + 'px';
-            car.style.top = carPosition.y + 'px';
-        }
-
-        function startGameLoop() {
-            moveInterval = setInterval(() => {
-                moveCar();
-                checkCheckpointCollisions();
-            }, 16); // ~60fps
-        }
-
-        function stopGameLoop() {
-            if (moveInterval) {
-                clearInterval(moveInterval);
-                moveInterval = null;
-            }
-            keys = {};
-        }
-
-        function moveCar() {
-            const car = document.getElementById('car');
-            const gameContainer = document.getElementById('gameContainer');
-            const containerRect = gameContainer.getBoundingClientRect();
-
-            let newX = carPosition.x;
-            let newY = carPosition.y;
-            let isMoving = false;
-
-            if (keys['ArrowUp'] || keys['w'] || keys['W']) {
-                newY = Math.max(0, carPosition.y - carSpeed);
-                isMoving = true;
-            }
-            if (keys['ArrowDown'] || keys['s'] || keys['S']) {
-                newY = Math.min(containerRect.height - 80, carPosition.y + carSpeed);
-                isMoving = true;
-            }
-            if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
-                newX = Math.max(0, carPosition.x - carSpeed);
-                isMoving = true;
-            }
-            if (keys['ArrowRight'] || keys['d'] || keys['D']) {
-                newX = Math.min(containerRect.width - 80, carPosition.x + carSpeed);
-                isMoving = true;
-            }
-
-            // Minimize controls when car starts moving
-            if (isMoving) {
-                minimizeGameControls();
-            }
-
-            carPosition.x = newX;
-            carPosition.y = newY;
-
-            car.style.left = carPosition.x + 'px';
-            car.style.top = carPosition.y + 'px';
-        }
-
-        function minimizeGameControls() {
-            const gameControls = document.getElementById('gameControls');
-            if (gameControls && !gameControls.classList.contains('minimized')) {
-                gameControls.classList.add('minimized');
-            }
-        }
-
-        function checkCheckpointCollisions() {
-            const car = document.getElementById('car');
-            const carRect = car.getBoundingClientRect();
-            const checkpoints = document.querySelectorAll('.checkpoint');
-            let isNearCheckpoint = false;
-            let nearestCheckpoint = null;
-
-            checkpoints.forEach(checkpoint => {
-                const checkpointRect = checkpoint.getBoundingClientRect();
-
-                // Calculate center points for better collision detection
-                const carCenterX = carRect.left + carRect.width / 2;
-                const carCenterY = carRect.top + carRect.height / 2;
-                const checkpointCenterX = checkpointRect.left + checkpointRect.width / 2;
-                const checkpointCenterY = checkpointRect.top + checkpointRect.height / 2;
-
-                const distance = Math.sqrt(
-                    Math.pow(carCenterX - checkpointCenterX, 2) +
-                    Math.pow(carCenterY - checkpointCenterY, 2)
-                );
-
-                // Check if car is within checkpoint radius
-                if (distance < 60) {
-                    isNearCheckpoint = true;
-                    nearestCheckpoint = checkpoint;
-
-                    if (!checkpoint.classList.contains('reached')) {
-                        checkpoint.classList.add('reached');
-                        currentCheckpoint = checkpoint;
-                        const sectionId = checkpoint.id.replace('checkpoint-', '');
-                        // Small delay for visual feedback
-                        setTimeout(() => {
-                            showPortfolioSection(sectionId);
-                        }, 300);
-                    }
-                } else {
-                    // Reset checkpoint if car moves away
-                    if (checkpoint === currentCheckpoint) {
-                        checkpoint.classList.remove('reached');
-                        currentCheckpoint = null;
-                        closePortfolioPopup();
-                    }
-                }
-            });
-
-            // Close popup if car moves away from all checkpoints
-            if (!isNearCheckpoint && currentCheckpoint) {
-                currentCheckpoint.classList.remove('reached');
-                currentCheckpoint = null;
-                closePortfolioPopup();
-            }
-        }
-
-        // Keyboard event listeners
-        document.addEventListener('keydown', function (e) {
-            if (gameActive) {
-                keys[e.key] = true;
-                e.preventDefault();
-            }
-        });
-
-        document.addEventListener('keyup', function (e) {
-            if (gameActive) {
-                keys[e.key] = false;
-            }
-        });
-
-        // Mobile touch controls
-        function startMove(direction) {
-            if (!gameActive) return;
-
-            const keyMap = {
-                'up': 'ArrowUp',
-                'down': 'ArrowDown',
-                'left': 'ArrowLeft',
-                'right': 'ArrowRight'
-            };
-
-            keys[keyMap[direction]] = true;
-        }
-
-        function stopMove() {
-            keys = {};
-        }
-
-        // Portfolio section display
-        const portfolioData = {
-            about: {
-                title: 'About Me',
-                content: '<p>Computer Engineering graduate with hands-on experience in IT support, networking, and software development. Skilled in troubleshooting, system configuration, and backend programming fundamentals. Seeking an entry-level IT or software role to apply technical and problem-solving skills.</p>'
-            },
-            skills: {
-                title: 'Technical Skills',
-                content: `
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-code"></i> Frontend</h4>
-                            <p>HTML, CSS, and JavaScript.</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-code"></i> Backend</h4>
-                            <p>Python, Java , C++, PHP, and SQL.</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-code"></i> Artificial Intelligence & LLMs</h4>
-                            <p>Large Language Models, Prompt Engineering, AI Model Evaluation (Basic), LLM APIs (Basic)</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-shield-alt"></i> Security</h4>
-                            <p>TCP/IP, DNS, VPNs, Firewalls, Penetration Testing</p>
-                        </div>
-                        <div>
-                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-server"></i> Systems</h4>
-                            <p>Linux, Windows Server, Virtualization</p>
-                        </div>
-                                                <div>
-                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-server"></i> Toold</h4>
-                            <p>Git, Arduino IDE, Microsoft Office</p>
-                        </div>
-                    </div>
-                `
-            },
-            projects: {
-                title: 'Featured Project',
-                content: `
-                    <h3 style="color: var(--accent); margin-bottom: 1rem;">Syringe Needle Collector Machine</h3>
-                    <p>Award-winning automation solution using Arduino micro-controller to improve medical waste collection efficiency and safety. Recognized as Most Outstanding Research in Computer Engineering.</p>
-                    <div style="margin-top: 1rem;">
-                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem; margin-right: 0.5rem;">Arduino IDE</span>
-                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem; margin-right: 0.5rem;">C++</span>
-                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem; margin-right: 0.5rem;">Embedded Systems</span>
-                        <span style="background: rgba(139, 92, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 15px; color: var(--accent-purple); font-size: 0.9rem;">Automation</span>
-                    </div>
-                `
-            },
-            awards: {
-                title: 'Awards & Recognition',
-                content: `
-                    <div style="display: flex; gap: 1.5rem; align-items: center; margin-top: 1rem;">
-                        <i class="fas fa-trophy" style="font-size: 3rem; color: #fbbf24;"></i>
-                        <div>
-                            <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Most Outstanding Research in Computer Engineering</h3>
-                            <p>Syringe Needle Collector Machine Using Arduino Micro-Controller</p>
-                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;"><small>10th LPU-Cavite College of Engineering Research Colloquium</small></p>
-                        </div>
-                    </div>
-                `
-            },
-            contact: {
-                title: "Let's Connect",
-                content: `
-                    <p style="margin-bottom: 1.5rem;">I'm open to new opportunities and exciting projects. Feel free to reach out!</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0;">
-                        <a href="mailto:glennkoy0409@gmail.com" style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; transition: all 0.3s;">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://github.com/gwada0409" target="_blank" style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; transition: all 0.3s;">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/gwada0409/" target="_blank" style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; transition: all 0.3s;">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                    <div style="text-align: center; color: var(--text-gray);">
-                        <p><i class="fas fa-envelope"></i> glennkoy0409@gmail.com</p>
-                        <p><i class="fas fa-phone"></i> +63 906 199 5229</p>
-                    </div>
-                `
-            }
-        };
-
-        function showPortfolioSection(sectionId) {
-            const popup = document.getElementById('portfolioPopup');
-            const popupContent = document.getElementById('popupContent');
-            const data = portfolioData[sectionId];
-
-            if (data) {
-                popupContent.innerHTML = `
-                    <h2 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.8rem;">${data.title}</h2>
-                    ${data.content}
-                `;
-                popup.classList.add('active');
-            }
-        }
-
-        function closePortfolioPopup() {
-            const popup = document.getElementById('portfolioPopup');
-            popup.classList.remove('active');
-            // Reset checkpoint color when popup closes
-            if (currentCheckpoint) {
-                currentCheckpoint.classList.remove('reached');
-                currentCheckpoint = null;
-            }
-        }
-
-        function resetAllCheckpoints() {
-            const checkpoints = document.querySelectorAll('.checkpoint');
-            checkpoints.forEach(checkpoint => {
-                checkpoint.classList.remove('reached');
-            });
-            currentCheckpoint = null;
-        }
-
-        function minimizeGameInfoAfterDelay() {
-            const gameInfo = document.getElementById('gameInfo');
-            const controlInstructions = document.getElementById('controlInstructions');
-
-            if (gameInfo) {
-                // Update instructions based on device type
-                if (window.innerWidth <= 768 && controlInstructions) {
-                    controlInstructions.textContent = 'Use joystick to move';
-                } else if (controlInstructions) {
-                    controlInstructions.textContent = 'WASD or Arrow Keys to move';
-                }
-
-                gameInfo.classList.remove('minimized');
-                if (gameInfoTimeout) {
-                    clearTimeout(gameInfoTimeout);
-                }
-                gameInfoTimeout = setTimeout(() => {
-                    gameInfo.classList.add('minimized');
-                }, 5000);
-            }
-        }
-
-        function initializeJoystick() {
-            const joystickStick = document.getElementById('joystickStick');
-            const joystickBase = document.querySelector('.joystick-base');
-            if (!joystickStick || !joystickBase) return;
-
-            const baseRect = joystickBase.getBoundingClientRect();
-            const baseCenterX = baseRect.left + baseRect.width / 2;
-            const baseCenterY = baseRect.top + baseRect.height / 2;
-            const maxDistance = 35; // Maximum distance stick can move from center
-
-            let touchId = null;
-
-            function handleStart(e) {
-                e.preventDefault();
-                const touch = e.touches ? e.touches[0] : e;
-                touchId = touch.identifier || 'mouse';
-                joystickActive = true;
-                joystickStick.classList.add('active');
-                updateJoystick(touch);
-            }
-
-            function handleMove(e) {
-                if (!joystickActive) return;
-                e.preventDefault();
-                const touch = e.touches ?
-                    Array.from(e.touches).find(t => t.identifier === touchId) : e;
-                if (touch) {
-                    updateJoystick(touch);
-                }
-            }
-
-            function handleEnd(e) {
-                if (!joystickActive) return;
-                e.preventDefault();
-                joystickActive = false;
-                joystickStick.classList.remove('active');
-                joystickPosition = { x: 0, y: 0 };
-                joystickStick.style.transform = 'translate(-50%, -50%)';
-                keys['ArrowUp'] = false;
-                keys['ArrowDown'] = false;
-                keys['ArrowLeft'] = false;
-                keys['ArrowRight'] = false;
-            }
-
-            function updateJoystick(touch) {
-                const clientX = touch.clientX;
-                const clientY = touch.clientY;
-
-                const deltaX = clientX - baseCenterX;
-                const deltaY = clientY - baseCenterY;
-                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-                if (distance > maxDistance) {
-                    const angle = Math.atan2(deltaY, deltaX);
-                    joystickPosition.x = Math.cos(angle) * maxDistance;
-                    joystickPosition.y = Math.sin(angle) * maxDistance;
-                } else {
-                    joystickPosition.x = deltaX;
-                    joystickPosition.y = deltaY;
-                }
-
-                joystickStick.style.transform = `translate(calc(-50% + ${joystickPosition.x}px), calc(-50% + ${joystickPosition.y}px))`;
-
-                // Update movement keys based on joystick position
-                const threshold = 15;
-                keys['ArrowUp'] = joystickPosition.y < -threshold;
-                keys['ArrowDown'] = joystickPosition.y > threshold;
-                keys['ArrowLeft'] = joystickPosition.x < -threshold;
-                keys['ArrowRight'] = joystickPosition.x > threshold;
-            }
-
-            // Touch events
-            joystickBase.addEventListener('touchstart', handleStart, { passive: false });
-            document.addEventListener('touchmove', handleMove, { passive: false });
-            document.addEventListener('touchend', handleEnd, { passive: false });
-            document.addEventListener('touchcancel', handleEnd, { passive: false });
-
-            // Mouse events for testing
-            joystickBase.addEventListener('mousedown', handleStart);
-            document.addEventListener('mousemove', handleMove);
-            document.addEventListener('mouseup', handleEnd);
-        }
-
-        function resetJoystick() {
-            joystickActive = false;
-            joystickPosition = { x: 0, y: 0 };
-            const joystickStick = document.getElementById('joystickStick');
-            if (joystickStick) {
-                joystickStick.style.transform = 'translate(-50%, -50%)';
-                joystickStick.classList.remove('active');
-            }
-            keys['ArrowUp'] = false;
-            keys['ArrowDown'] = false;
-            keys['ArrowLeft'] = false;
-            keys['ArrowRight'] = false;
-        }
-
-        // Close popup when clicking outside
-        document.getElementById('portfolioPopup').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closePortfolioPopup();
-            }
-        });
-
-        // Scroll Animation using Intersection Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function (entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    // Unobserve after animation to improve performance
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe all elements with animation classes
-        document.addEventListener('DOMContentLoaded', function () {
-            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-left, .slide-in-right, .scale-in');
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-        });
-
-        // Back to Top Button
-        const backToTopButton = document.querySelector('.back-to-top');
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Show/hide back to top button based on scroll position
-        window.addEventListener('scroll', function () {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-    </script>
-
-
-
-
-
+</html>

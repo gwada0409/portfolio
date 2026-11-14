@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "version": "2.0.0",
+  "description": "Personal portfolio of Glenn Wenand Arsemel Adorio — Computer Engineering Graduate & IT Professional",
+  "private": true,
+  "scripts": {
+    "sync-vendor": "mkdir -p assets/vendor && cp node_modules/animejs/dist/bundles/anime.esm.min.js assets/vendor/anime.esm.min.js",
+    "postinstall": "npm run sync-vendor",
+    "dev": "python3 -m http.server 4173",
+    "build": "npm run sync-vendor && node -e \"const fs=require('fs'); const html=fs.readFileSync('index.html','utf8'); if(!html.includes('</html>')||!html.includes('</body>')) throw new Error('Missing closing HTML/BODY tags'); if(/toggleGameMode|Game Mode|car\\.png|joystick/i.test(html)) throw new Error('Game Mode reference found'); console.log('Build verification passed.');\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwada0409/portfolio.git"
+  },
+  "author": "Glenn Wenand Arsemel Adorio",
+  "license": "ISC",
+  "dependencies": {
+    "animejs": "^4.5.0"
+  }
+}
