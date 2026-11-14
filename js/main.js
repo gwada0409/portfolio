@@ -1,4 +1,4 @@
-import { initAnimations, animateModalOpen, cleanupAnimations } from './animations.js';
+import { initAnimations, animateModalOpen, cleanupAnimations } from './animations.js?v=2.1';
 
 // ==========================================================================
 // Theme Management (Light / Dark with localStorage persistence)
@@ -204,12 +204,18 @@ function initBackToTop() {
 // ==========================================================================
 // Bootstrap
 // ==========================================================================
-document.addEventListener('DOMContentLoaded', () => {
+function bootstrap() {
   initTheme();
   initNavigation();
   initGalleryModal();
   initBackToTop();
   initAnimations();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootstrap);
+} else {
+  bootstrap();
+}
 
 window.addEventListener('pagehide', cleanupAnimations);

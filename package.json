@@ -4,9 +4,9 @@
   "description": "Personal portfolio of Glenn Wenand Arsemel Adorio — Computer Engineering Graduate & IT Professional",
   "private": true,
   "scripts": {
-    "sync-vendor": "mkdir -p assets/vendor && cp node_modules/animejs/dist/bundles/anime.esm.min.js assets/vendor/anime.esm.min.js",
+    "sync-vendor": "node -e \"const fs=require('fs'); fs.mkdirSync('assets/vendor',{recursive:true}); if(fs.existsSync('node_modules/animejs/dist/bundles/anime.esm.min.js')) fs.copyFileSync('node_modules/animejs/dist/bundles/anime.esm.min.js','assets/vendor/anime.esm.min.js');\"",
     "postinstall": "npm run sync-vendor",
-    "dev": "python3 -m http.server 4173",
+    "dev": "python -m http.server 4173",
     "build": "npm run sync-vendor && node -e \"const fs=require('fs'); const html=fs.readFileSync('index.html','utf8'); if(!html.includes('</html>')||!html.includes('</body>')) throw new Error('Missing closing HTML/BODY tags'); if(/toggleGameMode|Game Mode|car\\.png|joystick/i.test(html)) throw new Error('Game Mode reference found'); fs.rmSync('public',{recursive:true,force:true}); fs.mkdirSync('public',{recursive:true}); for(const item of ['index.html','css','js','assets','logo.png','profile.jpg','profile-hover.jpg','3d-model.jpg','actual-model.jpg','specification.jpg','video-poster.jpg']){ fs.cpSync(item,'public/'+item,{recursive:true}); } console.log('Build verification passed and public/ directory generated.');\""
   },
   "repository": {
